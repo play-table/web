@@ -1,0 +1,11 @@
+.star_box{
+    display: flex;
+    flex-direction: row;
+    height: 15px;
+    align-items: center;
+}
+.star_box > p {
+    font-size: 13px;
+    margin: 0 5px;
+    text-align: center;
+}

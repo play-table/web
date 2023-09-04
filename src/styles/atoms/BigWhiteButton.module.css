@@ -1,0 +1,10 @@
+.big_white_btn{
+    width: 440px;
+    height: 47px;
+    border-radius: 10px;
+    border: 1px solid #ABA5A5;
+    background: #FFF;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
