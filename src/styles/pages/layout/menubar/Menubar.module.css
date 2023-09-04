@@ -1,0 +1,17 @@
+.menu_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #F9B32C;
+    height: 15vw;
+    position: fixed;
+    bottom: 0;
+}
+
+.icon_wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
