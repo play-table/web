@@ -7,6 +7,7 @@ import Section1 from "./components/pages/Layout/Section1";
 import Slide2 from "./components/pages/Layout/Slide2";
 import Slide3 from "./components/pages/Layout/Slide3";
 import Menu from "./components/blocks/Menu";
+import SmallButton from "./components/atoms/SmallButton";
 
 function App() {
 
@@ -27,7 +28,10 @@ function App() {
           </PC>
           <Mobile>
             <Header />
-            <Slide1 />
+            <SmallButton content="리뷰쓰기" type="orange"/>
+            <SmallButton content="06:30"  type="orange"/>
+            <SmallButton content="승인"  type="orange"/>
+            <SmallButton content="취소"  type="white"/>
             <Section1 />
             <Slide2 />
             <Slide3 />
