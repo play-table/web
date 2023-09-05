@@ -1,0 +1,14 @@
+.user_container{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.user_container img{
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+}
+.user_container span{
+    padding: 4px;
+}

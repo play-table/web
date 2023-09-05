@@ -1,0 +1,8 @@
+.logo_container{
+    border: 1px solid orange;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 70%;
+    padding: 4px;
+}

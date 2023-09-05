@@ -1,12 +1,14 @@
 .menu_container {
+    background: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     border-top: 1px solid #F9B32C;
-    height: 15vw;
+    height: 10vw;
     position: fixed;
     bottom: 0;
+    z-index: 99;
 }
 
 .icon_wrap{
