@@ -1,0 +1,28 @@
+.search_container{
+    padding: 20px 20px 10vh;
+}
+
+.search_header_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 6vh;
+    width: 100%;
+ }
+
+.input_wrap{
+    display: flex;
+    align-items: center;
+    border: 1px solid orange;
+    border-radius: 12px;
+    height: 90%;
+    width: 90%;
+    justify-content: space-around;
+}
+
+.input_wrap input{
+    height: 90%;
+    width: 80%;
+    outline: none;
+}
+
