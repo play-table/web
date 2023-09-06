@@ -1,0 +1,13 @@
+.header {
+    position: relative;
+}
+.header > img {
+    width: 100%;
+}
+.header_fixed{
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    top: 0;
+    padding: 19px 20px;
+}

@@ -1,0 +1,14 @@
+.main_btn_wrap {
+    margin: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+.main_btn_wrap > button{
+    width: 13.123rem;
+    height: 71px;
+    border-radius: 15px;
+    border: 1px solid #000;
+}

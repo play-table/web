@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-
+    padding: 0 20px;
 }
 .user_wrap{
     display: flex;
@@ -43,11 +43,12 @@
 .review_wrap{
     display: flex;
     flex-direction: column;
+
 }
 .review_img{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 10px;
 }
 
 .review_wrap > p {
