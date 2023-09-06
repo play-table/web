@@ -6,8 +6,8 @@ const StoreHeader = () => {
         <div className={styles.header}>
             <img src="/image/store-store-21.png" alt="store"/>
                 <div className={styles.header_fixed}>
-                    <img src="/image/back.svg" alt="back"/>
-                    <img src="/image/home.svg" alt="home"/>
+                    <button><img src="/image/back.svg" alt="back"/></button>
+                    <button><img src="/image/home.svg" alt="home"/></button>
                 </div>
         </div>
     );

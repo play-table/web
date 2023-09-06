@@ -11,3 +11,7 @@
     top: 0;
     padding: 19px 20px;
 }
+.header_fixed > button {
+    all: unset;
+    cursor: pointer;
+}
