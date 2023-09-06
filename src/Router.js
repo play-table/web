@@ -3,7 +3,9 @@ import App from './App';
 import My from './components/pages/Infomation/My';
 import Root from './components/pages/Layout/Root';
 import Home from './components/pages/home/Home';
+import Store from "./components/pages/store/Store";
 import Search from "./components/pages/search/Search";
+
 
 const router = createBrowserRouter([
   {
@@ -15,9 +17,13 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: '/store',
+        element: <Store />,
+      },
         path:'/search',
         element:<Search/>
       }
+
     ],
   },
   {

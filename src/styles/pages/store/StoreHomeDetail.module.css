@@ -1,0 +1,17 @@
+.home_detail{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 20px;
+}
+.home_time > p {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+}
+.home_time > div {
+    color: #616163;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+}

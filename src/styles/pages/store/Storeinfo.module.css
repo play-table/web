@@ -1,0 +1,31 @@
+.store_info{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    margin-top: 1rem;
+}
+.store_info > p {
+    font-size: 13px;
+    color: #605E5E;
+}
+
+.store_info > span{
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+.star_box{
+    display: flex;
+    align-items: center;
+}
+.star_box >img{
+    width: 20px;
+}
+.star_box > p{
+    font-weight: 700;
+    margin: 0 5px;
+}
+.star_box > span {
+    color: #ABA9B6;
+    margin: 0 5px;
+}
