@@ -1,0 +1,14 @@
+.button_wrap{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 65%;
+    height: 70%;
+    border-radius: 20px
+}
+
+.input_wrap{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
