@@ -6,6 +6,8 @@ import Home from './components/pages/home/Home';
 import Store from "./components/pages/store/Store";
 import Search from "./components/pages/search/Search";
 import Review from "./components/pages/review/Review";
+import ReviewInput from "./components/pages/review/ReviewInput";
+import Edit from "./components/pages/my/Edit";
 
 
 const router = createBrowserRouter([
@@ -27,7 +29,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/review',
-        element:<Review />
+        element:<Review />,
+      },
+      {
+        path: "/review/input",
+        element:<ReviewInput />
+      },
+      {
+        path: '/edit',
+        element:<Edit />
       }
     ],
   },

@@ -1,5 +1,5 @@
 .my_wrap {
-    padding: 0 20px 10vh;
+    padding: 0 20px 10px;
 }
 
 .mypage {
@@ -14,6 +14,7 @@ header {
     height: 48px;
     display: flex;
     align-items: center;
+    gap: 366px;
 }
 
 .select_tab {
@@ -82,9 +83,7 @@ header {
 .store_img {
     margin-bottom: 1vw;
 }
-.reservation_list_store_detail {
 
-}
 .reservation_list_store p {
     display: flex;
     padding: 1vw;
@@ -101,4 +100,5 @@ header {
 
 .reveiw_button {
     width: 20vw;
+    cursor: pointer;
 }
