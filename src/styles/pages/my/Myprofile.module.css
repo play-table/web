@@ -1,3 +1,104 @@
-.my_mypage {
+.my_wrap {
+    padding: 0 20px 10vh;
+}
+
+.mypage {
     display: flex;
+    align-items: center;
+}
+
+header {
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 2px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.select_tab {
+    display: flex;
+    text-align: center;
+    padding: 4%;
+}
+
+.select_review_tab {
+    display: flex;
+    text-align: center;
+    padding: 4%;
+}
+
+.select_tab > div {
+    width: calc(100% / 3);
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.select_tab > p {
+    padding-bottom: 3%;
+}
+
+.review_tab {
+    border-style: double;
+    border-right: 1px solid #F9B32C;
+    border-left: 1px solid #F9B32C;
+}
+
+.veiw_container {
+    font-weight: 700;
+    font-size: 100%;
+    display: flex;
+
+
+}
+
+.veiw_container > div {
+    width: calc(100% / 2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4%;
+}
+
+
+
+.reservation_list {
+    display: flex;
+    padding: 5% 0 5% 0 ;
+}
+
+.reservation_list_num {
+    width: 15vw;
+}
+
+.reservation_list_store {
+    display: flex;
+    width: 57vw;
+    cursor: pointer;
+}
+.store_img {
+    margin-bottom: 1vw;
+}
+.reservation_list_store_detail {
+
+}
+.reservation_list_store p {
+    display: flex;
+    padding: 1vw;
+}
+.reservation_list_store_contents p {
+    padding: 1vw;
+}
+
+
+.store_img {
+    width: 48px;
+    height: 48px;
+}
+
+.reveiw_button {
+    width: 20vw;
 }

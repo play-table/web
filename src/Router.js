@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import My from './components/pages/Infomation/My';
+import My from './components/pages/my/My';
 import Root from './components/pages/Layout/Root';
 import Home from './components/pages/home/Home';
 import Store from "./components/pages/store/Store";
 import Search from "./components/pages/search/Search";
+import Review from "./components/pages/review/Review";
 
 
 const router = createBrowserRouter([
@@ -20,10 +21,14 @@ const router = createBrowserRouter([
         path: '/store',
         element: <Store />,
       },
-        path:'/search',
-        element:<Search/>
+      {
+        path: '/search',
+        element:<Search />
+      },
+      {
+        path: '/review',
+        element:<Review />
       }
-
     ],
   },
   {
