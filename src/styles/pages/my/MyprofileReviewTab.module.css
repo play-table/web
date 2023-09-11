@@ -1,0 +1,21 @@
+.review_list {
+    padding: 5% 0 5% 0;
+}
+
+.review_detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1vh;
+}
+
+.star {
+    display: flex;
+}
+
+.review_detail div > p {
+    color: #ABA5A5;
+}
+.review_card_img {
+    display: flex;
+    margin-bottom: 2vh;
+}

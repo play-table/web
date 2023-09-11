@@ -1,0 +1,48 @@
+.edit_wrap {
+    padding: 0 20px 10px;
+}
+
+.header {
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 2px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input_section {
+    padding: 2vh 0 2vh 0;
+}
+
+.input_title {
+    padding: 1vh 0 1vh 0;
+    font-size: 20px;
+    color: #ABA5A5;
+}
+
+.input_info {
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 3px;
+}
+
+.input_info::placeholder {
+    color: #000;
+}
+
+.button_area {
+    display: flex;
+    margin-top: 7vh;
+}
+
+.button_area > p {
+    width: 50%;
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: 600;
+}
+
+.button_area > p:last-child {
+    color: #F9B32C;
+}

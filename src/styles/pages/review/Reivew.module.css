@@ -1,0 +1,32 @@
+.review_wrap {
+    padding: 0 20px 10px;
+    padding-bottom: 8vh;
+}
+
+.store_review_list {
+    padding: 3% 0 3% 0;
+}
+
+.store_review_list p {
+    word-break: break-word;
+}
+
+.store_title {
+    display: flex;
+    width: 57vw;
+    cursor: pointer;
+    padding: 10px 0 20px 0;
+}
+.store_title p {
+    display: flex;
+    padding: 1vw;
+}
+
+.store_img {
+    margin-bottom: 1vw;
+}
+
+.review_write_user {
+    display: flex;
+    align-items: center;
+}
