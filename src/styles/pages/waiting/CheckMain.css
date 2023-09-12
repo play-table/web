@@ -1,0 +1,48 @@
+.waiting_check_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.waiting_check_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 226px;
+}
+.waiting_check_main2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 44px;
+}
+.waiting_check_main_font {
+  color: #000;
+  font-family: Inter;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.waiting_check_sub_font {
+  color: #000;
+  font-family: Inter;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.waiting_check_sub_font2 {
+  color: #aba5a5;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.waiting_check_sub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 221px;
+  margin-bottom: 80px;
+}
