@@ -1,0 +1,41 @@
+.waiting_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.waiting_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+.waiting_middle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.waiting_main_font {
+  color: #000;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.waiting_sub_font {
+  color: #000;
+  font-family: Inter;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.waiting_sub {
+  display: flex;
+  margin-top: 44px; /* 버튼과 상단 간격을 조절합니다. */
+  margin-bottom: 60px;
+}
