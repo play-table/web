@@ -1,0 +1,36 @@
+button {
+    all: unset;
+}
+.owner_container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+.owner_container > span {
+    font-size: 48px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.owner_btn_wrap {
+    margin: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+.owner_btn_wrap > button{
+    width: 13.123rem;
+    height: 71px;
+    border-radius: 15px;
+    border: 1px solid #000;
+}
