@@ -7,8 +7,12 @@ import { useNavigate } from "react-router-dom";
 const WaitingHome = () => {
   const navigate = useNavigate();
 
-  const handleOpenWaitingCheck = () => {
-    navigate("/waiting-check");
+  const handleOpenWaiting2 = () => {
+    navigate("/switch");
+  };
+  const handleButtonClick = () => {
+    console.log("BigWhiteButton clicked");
+    navigate(-1); // 혹은 다른 작업 수행
   };
 
   return (
@@ -38,10 +42,13 @@ const WaitingHome = () => {
         <div className="waiting_main">
           <BigOrangeButton
             content="웨이팅 등록하기"
-            onClick={handleOpenWaitingCheck}
+            onClickHandler={handleOpenWaiting2}
           ></BigOrangeButton>
           <div className="waiting_sub">
-            <BigWhiteButton content="닫기"></BigWhiteButton>
+            <BigWhiteButton
+              content="닫기"
+              onClickHandler={handleButtonClick}
+            ></BigWhiteButton>
           </div>
         </div>
       </div>
