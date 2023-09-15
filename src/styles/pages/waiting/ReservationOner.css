@@ -1,0 +1,41 @@
+.reservation_oner_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.reservation_oner_content {
+  display: flex;
+  justify-self: start;
+  margin-top: 24px;
+  margin-bottom: 23px;
+}
+.reservation_oner_content_font {
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.reservation_oner_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-right: 20px;
+}
+.reservation_oner_main_font {
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.reservation_oner_main_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 26px;
+  margin-bottom: 70px;
+}

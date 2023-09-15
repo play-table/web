@@ -13,10 +13,14 @@ import WaitingCheck from "./components/pages/waiting/WaitingCheck";
 import Calendar from "./components/atoms/Calander";
 import Reservation from "./components/pages/waiting/Reservation";
 import ReservationConfirm from "./components/pages/waiting/ReservationConfirm";
+import ReservationOner from "./components/pages/waiting/ReservationOner";
+import WaitingOner from "./components/pages/waiting/WaitingOner";
+import WaitingComponent from "./components/pages/waiting/WaitingComponent";
 import Customer from "./components/pages/customer/Customer";
 import Owner from "./components/pages/owner/Owner";
 import InputMenu from "./components/pages/inputMenu/InputMenu";
 import InputStore from "./components/pages/inputStore/InputStore";
+
 
 const router = createBrowserRouter([
   {
@@ -68,6 +72,17 @@ const router = createBrowserRouter([
         element: <ReservationConfirm />,
       },
       {
+
+        path: "/reservation3",
+        element: <ReservationOner />,
+      },
+      {
+        path: "/reservation4",
+        element: <WaitingOner />,
+      },
+      {
+        path: "/switch",
+        element: <WaitingComponent />,
         path: "/customer",
         element: <Customer />,
       },
