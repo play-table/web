@@ -21,9 +21,9 @@ const WaitingHome = () => {
     getData()
   },[]);
   const { storeId } = useParams();
-  const getData = () =>
+  const getData = async () =>
       axios
-          .get(`http://localhost:8000/api/v1/waiting/id/` + storeId)
+          .get(`/api/v1/waiting/id/` + storeId)
           .then((response) => {
             setData(response.data);
             console.log(response.data);
