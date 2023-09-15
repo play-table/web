@@ -5,6 +5,7 @@ import BigWhiteButton from "../../atoms/BigWhiteButton";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import {api} from "../../../common/api/ApiClient";
 
 const WaitingHome = () => {
   const navigate = useNavigate();
@@ -21,13 +22,22 @@ const WaitingHome = () => {
     getData()
   },[]);
   const { storeId } = useParams();
-  const getData = async () =>
-      axios
-          .get(`/api/v1/waiting/id/` + storeId)
-          .then((response) => {
-            setData(response.data);
-            console.log(response.data);
-          });
+  const getData = async () => {
+    const data = await api(`/api/v1/waiting/${storeId}`, "GET", {})
+    setData(data);
+  }
+
+  const putData = async (e) => {
+    const {value} = e.target
+    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+  }
+
+      // axios
+      //     .get(`/api/v1/waiting/id/` + storeId)
+      //     .then((response) => {
+      //       setData(response.data);
+      //       console.log(response.data);
+      //     });
 
   return (
     <>
@@ -63,6 +73,8 @@ const WaitingHome = () => {
               content="닫기"
               onClickHandler={handleButtonClick}
             ></BigWhiteButton>
+            <button value="CUSTOMER_CANCEL" onClick={putData}>취소버튼</button>
+            <button value="OWNER_CANCEL" onClick={putData}>취소버튼</button>
           </div>
         </div>
       </div>
