@@ -20,7 +20,7 @@ const Reservation = () => {
   const navigate = useNavigate();
 
   const handleOpenReservation = () => {
-    navigate("/switch");
+    navigate("/switch?mode=reservation");
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");

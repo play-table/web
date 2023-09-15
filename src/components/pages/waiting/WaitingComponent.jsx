@@ -4,12 +4,14 @@ import Calendar from "../../atoms/Calander";
 import RoundButton from "../../atoms/RoundButton";
 import SmallButton from "../../atoms/SmallButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
 import { useParams } from "react-router-dom";
 import styles from "../../../styles/pages/waiting/CheckMain.css";
 
 const WaitingComponent = () => {
+  const location = useLocation();
+  console.log(location);
   const { page } = useParams(); // URL에서 경로 파라미터를 가져옴
   const navigate = useNavigate();
   const nav = useNavigate();
@@ -37,6 +39,14 @@ const WaitingComponent = () => {
       setError("");
     }
   };
+  useEffect(() => {
+    const mode = location.search.split("=")[1];
+    if (mode === "reservation") {
+      menuSwitch("res");
+    } else {
+      menuSwitch("rev");
+    }
+  }, [location]);
 
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");

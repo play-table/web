@@ -8,7 +8,7 @@ const WaitingHome = () => {
   const navigate = useNavigate();
 
   const handleOpenWaiting2 = () => {
-    navigate("/switch");
+    navigate("/switch?mode=waiting");
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
