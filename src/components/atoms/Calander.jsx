@@ -24,7 +24,7 @@ const Calendar = ({
     return false;
   };
 
-  const onClickDay = (day) => {
+  const onClickDay = (day, event) => {
     if (isSameDay(day, selectedDay)) {
       setSelectedDay(null);
     } else {
@@ -133,7 +133,7 @@ const Calendar = ({
         <td
           key={i}
           className={`futureDay ${isSameDay(day, selectedDay) && "choiceDay"}`}
-          onClick={() => onClickDay(day)}
+          onClick={(e) => onClickDay(day, e)}
         >
           <span className={isSameDay(day, today) ? "orange-circle" : ""}>
             {day.getDate()}

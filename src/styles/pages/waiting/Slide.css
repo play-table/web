@@ -1,0 +1,33 @@
+/* Slide.css */
+.slide-container {
+  display: flex; /* Flex 컨테이너로 설정하여 가로로 배치 */
+  overflow: hidden;
+  width: 100%; /* 부모 컨테이너에 맞게 가로 전체 너비 설정 */
+}
+
+.slide-item {
+  flex: 0 0 auto; /* 아이템 크기 유지 */
+  margin-right: 10px; /* 아이템 간격 설정 */
+}
+
+.slide-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 이전/다음 버튼 가운데 정렬 */
+  margin-top: 10px;
+}
+
+/* 이전/다음 버튼 스타일 */
+.slide-navigation button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.slide-navigation button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

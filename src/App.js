@@ -1,4 +1,4 @@
-import './styles/common/reset.css';
+import "./styles/common/reset.css";
 
 function App() {
   // redux load..

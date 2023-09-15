@@ -6,104 +6,136 @@ import React, { useState } from "react";
 import RoundButton from "../../atoms/RoundButton";
 import BigOrangeButton from "../../atoms/BigOrangeButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
+import { useNavigate } from "react-router-dom";
+import "../../../styles/pages/home/SwiperStyles.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import axios from "axios";
+
 const Reservation = () => {
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [isPrevMonth, setIsPrevMonth] = useState(false);
+  const [isNextMonth, setIsNextMonth] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOpenReservation = () => {
+    navigate("/switch");
+  };
+  const handleButtonClick = () => {
+    console.log("BigWhiteButton clicked");
+    navigate(-1); // 혹은 다른 작업 수행
+  };
+
   // 예약 상태를 나타내는 상태 변수
-  const [isReservation, setIsReservation] = useState(false);
+  const [moreTimes, setMoreTimes] = useState([
+    { time: "5:30", selected: false },
+    { time: "6:00", selected: false },
+    { time: "5:30", selected: false },
+    { time: "6:00", selected: false },
+    { time: "5:30", selected: false },
+    { time: "6:00", selected: false },
+    { time: "5:30", selected: false },
+    { time: "6:00", selected: false },
+    { time: "5:30", selected: false },
+    { time: "6:00", selected: false },
+    { time: "5:30", selected: false },
+    { time: "6:00", selected: false },
+    // 여기에 더 많은 시간 버튼을 추가하세요
+  ]);
 
-  // 선택된 인원 수를 나타내는 상태 변수
-  const [selectedPeople, setSelectedPeople] = useState(1);
+  // 더 많은 인원을 나타내는 버튼 상태 변수
+  const [morePeople, setMorePeople] = useState([
+    { people: 1, selected: false },
+    { people: 2, selected: false },
+    { people: 3, selected: false },
+    { people: 1, selected: false },
+    { people: 2, selected: false },
+    { people: 3, selected: false },
+    { people: 1, selected: false },
+    { people: 2, selected: false },
+    { people: 3, selected: false },
+    { people: 1, selected: false },
+    { people: 2, selected: false },
+    { people: 3, selected: false },
+    { people: 1, selected: false },
+    { people: 2, selected: false },
+    { people: 3, selected: false },
+    // 여기에 더 많은 인원 버튼을 추가하세요
+  ]);
 
-  // 예약 버튼 클릭 핸들러
-  const handleReservationClick = () => {
-    // 예약 상태를 토글
-    setIsReservation(!isReservation);
+  // 시간 버튼 클릭 핸들러
+  const handleTimeButtonClick = (index) => {
+    const updatedTimes = [...moreTimes];
+    updatedTimes[index].selected = !updatedTimes[index].selected;
+    setMoreTimes(updatedTimes);
   };
 
-  // 라운드 버튼 클릭 핸들러
-  const handleRoundButtonClick = (num) => {
-    setSelectedPeople(num);
+  // 인원 버튼 클릭 핸들러
+  const handlePeopleButtonClick = (index) => {
+    const updatedPeople = [...morePeople];
+    updatedPeople[index].selected = !updatedPeople[index].selected;
+    setMorePeople(updatedPeople);
   };
+
   return (
     <>
       <div className="reservation_container">
         <MiniStoreInfo />
         <div className="reservation_main">
-          <Calendar />
+          <Calendar
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+            isPrevMonth={isPrevMonth}
+            isNextMonth={isNextMonth}
+          />
         </div>
         <div className="reservation_main_time">
-          <SmallButton
-            content="5:30"
-            type={isReservation ? "white" : "orange"}
-            onClickHandler={handleReservationClick}
-          />
-          <SmallButton
-            content="5:30"
-            type={isReservation ? "white" : "orange"}
-            onClickHandler={handleReservationClick}
-          />
-          <SmallButton
-            content="5:30"
-            type={isReservation ? "white" : "orange"}
-            onClickHandler={handleReservationClick}
-          />
-          <SmallButton
-            content="5:30"
-            type={isReservation ? "white" : "orange"}
-            onClickHandler={handleReservationClick}
-          />
-          <SmallButton
-            content="5:30"
-            type={isReservation ? "white" : "orange"}
-            onClickHandler={handleReservationClick}
-          />
-          <SmallButton
-            content="5:30"
-            type={isReservation ? "white" : "orange"}
-            onClickHandler={handleReservationClick}
-          />
+          <Swiper
+            slidesPerView={6}
+            navigation={false} // Navigation 모듈 사용
+          >
+            {moreTimes.map((item, index) => (
+              <SwiperSlide key={index}>
+                <SmallButton
+                  content={item.time}
+                  type={item.selected ? "white" : "orange"}
+                  onClickHandler={() => handleTimeButtonClick(index)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         <div className="reservation_main_person">
-          <RoundButton
-            content="1명"
-            type={selectedPeople === 1 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(1)}
-          />
-          <RoundButton
-            content="2명"
-            type={selectedPeople === 2 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(2)}
-          />
-          <RoundButton
-            content="3명"
-            type={selectedPeople === 3 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(3)}
-          />
-          <RoundButton
-            content="4명"
-            type={selectedPeople === 4 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(4)}
-          />
-          <RoundButton
-            content="5명"
-            type={selectedPeople === 5 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(5)}
-          />
-          <RoundButton
-            content="6명"
-            type={selectedPeople === 6 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(6)}
-          />
-          <RoundButton
-            content="7명"
-            type={selectedPeople === 7 ? "click" : "noColor"}
-            onClickHandler={() => handleRoundButtonClick(7)}
-          />
+          <Swiper
+            slidesPerView={7}
+            spaceBetween={20}
+            pagination={{ clickable: true }}
+            className="mySwiper"
+            navigation={false} // Navigation 모듈 사용
+          >
+            {morePeople.map((item, index) => (
+              <SwiperSlide key={index}>
+                <RoundButton
+                  content={`${item.people}명`}
+                  type={item.selected ? "click" : "noColor"}
+                  onClickHandler={() => handlePeopleButtonClick(index)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         <div className="reservation_main_btn_container">
-          <BigOrangeButton content="예약 등록하기" />
+          <BigOrangeButton
+            content="예약 등록하기"
+            onClickHandler={handleOpenReservation}
+          />
         </div>
         <div className="reservation_main_btn_container2">
-          <BigWhiteButton content="닫기"></BigWhiteButton>
+          <BigWhiteButton
+            content="닫기"
+            onClickHandler={handleButtonClick}
+          ></BigWhiteButton>
         </div>
       </div>
     </>

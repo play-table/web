@@ -36,6 +36,8 @@
 }
 .waiting_sub {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 44px; /* 버튼과 상단 간격을 조절합니다. */
   margin-bottom: 60px;
 }

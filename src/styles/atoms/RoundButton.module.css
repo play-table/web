@@ -1,23 +1,25 @@
-.round_btn_color{
-    width: 48px;
-    height: 48px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: #F9B32C;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 400;
+.round_btn_color {
+  width: 48px;
+  height: 48px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #f9b32c;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
 }
 
-.round_btn_noColor{
-    width: 48px;
-    height: 48px;
-    cursor: pointer;
-    border: 1px solid #ABA5A5;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 400;
-    color: #ABA5A5;
-    background: #ffffff;
+.round_btn_noColor {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  border: 1px solid #aba5a5;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 400;
+  color: #aba5a5;
+  background: #ffffff;
+  text-align: center;
 }
