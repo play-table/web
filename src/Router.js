@@ -44,16 +44,12 @@ const router = createBrowserRouter([
         element: <Edit />,
       },
       {
-        path: "/waiting",
+        path: "/waiting/:storeId",
         element: <WaitingHome />,
       },
       {
-        path: "/waiting2",
+        path: "/waiting/check/:storeId",
         element: <WaitingCheck />,
-      },
-      {
-        path: "/calendar",
-        element: <Calendar />,
       },
       {
         path: "/reservation",

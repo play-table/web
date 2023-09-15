@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "../../styles/atoms/BigWhiteButton.module.css";
-const BigWhiteButton = ({ content, onClickHandler }) => {
+const BigWhiteButton = (props) => {
+
   return (
-    <button className={styles.big_white_btn} onClick={onClickHandler}>
-      {content}
+    <button className={styles.big_white_btn} onClick={props.onClick}>
+      {props.content}
     </button>
   );
 };

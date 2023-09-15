@@ -2,7 +2,9 @@ import styles from "../../../styles/pages/waiting/WaitingHome.css";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
 import BigOrangeButton from "../../atoms/BigOrangeButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import axios from "axios";
+import {useEffect, useState} from "react";
 
 const WaitingHome = () => {
   const navigate = useNavigate();
@@ -10,6 +12,18 @@ const WaitingHome = () => {
   const handleOpenWaitingCheck = () => {
     navigate("/waiting-check");
   };
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    getData()
+  },[]);
+  const { storeId } = useParams();
+  const getData = () =>
+      axios
+          .get(`http://localhost:8000/api/v1/waiting/id/` + storeId)
+          .then((response) => {
+            setData(response.data);
+            console.log(response.data);
+          });
 
   return (
     <>
@@ -19,7 +33,7 @@ const WaitingHome = () => {
           <div className="waiting_main_font">현재 대기중인 팀</div>
         </div>
         <div className="waiting_main">
-          <span className="waiting_sub_font">30팀</span>
+          <span className="waiting_sub_font">{data-1}팀</span>
         </div>
         <div className="waiting_middle">
           <div className="waiting_main_font">성인</div>
