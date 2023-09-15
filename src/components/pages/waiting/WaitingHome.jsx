@@ -8,6 +8,16 @@ import {useEffect, useState} from "react";
 import {api} from "../../../common/api/ApiClient";
 
 const WaitingHome = () => {
+  const [count, setCount] = useState({
+    kid:0,
+    adult:0,
+    status:"waiting",
+  });
+  const onChangeCount = (name, value)=>{
+    setCount({...count,[name]:count[name]+value})
+  }
+  // onChangeCount("kid",-1)
+
   const navigate = useNavigate();
 
   const handleOpenWaiting2 = () => {
@@ -51,16 +61,19 @@ const WaitingHome = () => {
         </div>
         <div className="waiting_middle">
           <div className="waiting_main_font">성인</div>
-          <div className="waiting_main_font">- 4 +</div>
+          <div className="waiting_main_font">
+            <button onClick={onChangeCount("adult",-1)}>-</button> {count.adult} <button onClick={onChangeCount("adult",+1)}>+</button>
+          </div>
         </div>
         <div className="waiting_middle">
           <span className="waiting_main_font">유아</span>
-          <span className="waiting_main_font">- 0 +</span>
+          <span className="waiting_main_font">
+            <button onClick={onChangeCount("kid",-1)}>-</button>  {count.kid} <button onClick={onChangeCount("kid",+1)}>+</button></span>
         </div>
         <div className="waiting_main">
           <span className="waiting_main_font">
             {" "}
-            총방문인원 :<span className="waiting_sub_font"> 4명</span>
+            총방문인원 :<span className="waiting_sub_font"> {count.adult+count.kid}명</span>
           </span>
         </div>
         <div className="waiting_main">
