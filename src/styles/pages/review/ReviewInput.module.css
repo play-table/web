@@ -1,78 +1,79 @@
 .review_input_wrap {
-    padding: 0 20px 10px;
+  padding: 0 20px 10px;
 }
 
 .rating {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 10px 0 10px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 0 10px 0;
 }
 
 .num_rating {
-    color: #000;
-    font-family: Inter;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .input_section {
-    padding: 10px 0 20px 0;
+  padding: 10px 0 20px 0;
 }
 
 .input_title {
-    font-weight: bold;
-    padding-bottom: 5px;
+  font-weight: bold;
+  padding-bottom: 5px;
 }
 
 .input_contents {
-    width: 95%;
-    resize: none;
-    font-size: 16px; /* 입력되는 글씨 크기 설정 */
-    line-height: 1.5; /* 글씨 간격 설정 */
-    padding: 10px; /* 테두리와 글씨 입력 영역 사이의 간격 설정 */
-    border: 1px solid #ddd;
-    height: 30vh;
+  width: 95%;
+  resize: none;
+  font-size: 16px; /* 입력되는 글씨 크기 설정 */
+  line-height: 1.5; /* 글씨 간격 설정 */
+  padding: 10px; /* 테두리와 글씨 입력 영역 사이의 간격 설정 */
+  border: 1px solid #ddd;
+  height: 30vh;
 }
 
-.input_contents:focus{
-    background: #eff3f3;
-    width: 95%;
-    height: 30vh;
-    resize: none;
-    font-size: 16px;
-    line-height: 1.5;
-    padding: 10px;
-    border: 1px solid #ddd;
+.input_contents:focus {
+  background: #eff3f3;
+  width: 95%;
+  height: 30vh;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
-.input_picture_section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 2%;
+.input_picture_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 2%;
 }
 
 .input_picture {
-    border: 2px solid #ABA5A5;
-    width: calc(100%/2);
-    padding: 10%;
+  border: 2px solid #aba5a5;
+  width: calc(100% / 2);
+  padding: 10%;
 }
 
 .button_review_input_line {
-    border-radius: 10px;
-    background: #F9B32C;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 122px;
+  border-radius: 10px;
+  background: #f9b32c;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 122px;
+  margin-bottom: 70px;
 }
 
 .button_review_input {
-    font-weight: bold;
-    font-size: 20px;
-    background: none;
+  font-weight: bold;
+  font-size: 20px;
+  background: none;
 }
