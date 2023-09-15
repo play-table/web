@@ -6,13 +6,21 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import '../../../styles/pages/home/SwiperStyles.css';
+import {api} from "../../../common/api/ApiClient";
 
 const TopStoreSlideContainer = () => {
   const [stores, setStores] = useState([]);
+
+  const getStore = async () => {
+      try {
+          const data = await api("/api/v1/store/waiting-top", "GET", {})
+          console.log(data);
+      } catch (error){
+            alert('dadsada')
+      }
+  }
   useEffect(() => {
-    fetch('data/storeCardData.json')
-      .then((res) => res.json())
-      .then((data) => setStores(data));
+      getStore();
   }, []);
 
   return (
