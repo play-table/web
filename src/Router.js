@@ -55,16 +55,8 @@ const router = createBrowserRouter([
         element: <WaitingHome />,
       },
       {
-        path: "/waiting/check/:storeId",
-        element: <WaitingCheck />,
-      },
-      {
         path: "/reservation",
         element: <Reservation />,
-      },
-      {
-        path: "/reservation2",
-        element: <ReservationConfirm />,
       },
       {
         path: "/reservation3",
