@@ -1,11 +1,12 @@
-.big_color_btn{
-    width: 440px;
-    height: 71px;
-    border-radius: 10px;
-    background: #F9B32C;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 700;
+.big_color_btn {
+  width: 440px;
+  height: 71px;
+  border-radius: 10px;
+  background: #f9b32c;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
 }

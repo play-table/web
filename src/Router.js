@@ -21,7 +21,6 @@ import Owner from "./components/pages/owner/Owner";
 import InputMenu from "./components/pages/inputMenu/InputMenu";
 import InputStore from "./components/pages/inputStore/InputStore";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -72,7 +71,6 @@ const router = createBrowserRouter([
         element: <ReservationConfirm />,
       },
       {
-
         path: "/reservation3",
         element: <ReservationOner />,
       },
@@ -83,6 +81,8 @@ const router = createBrowserRouter([
       {
         path: "/switch",
         element: <WaitingComponent />,
+      },
+      {
         path: "/customer",
         element: <Customer />,
       },

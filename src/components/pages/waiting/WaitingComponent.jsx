@@ -7,6 +7,7 @@ import BigWhiteButton from "../../atoms/BigWhiteButton";
 import { useNavigate } from "react-router-dom";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
 import { useParams } from "react-router-dom";
+import styles from "../../../styles/pages/waiting/CheckMain.css";
 
 const WaitingComponent = () => {
   const { page } = useParams(); // URL에서 경로 파라미터를 가져옴

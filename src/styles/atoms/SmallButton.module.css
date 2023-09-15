@@ -1,21 +1,23 @@
 .orangeButtonColor {
-    width: 4.375rem;
-    height: 36px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: #F9B32C;
-    font-size: 13px;
+  width: 4.375rem;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #f9b32c;
+  font-size: 13px;
+  text-align: center;
 }
 
 .whiteButtonColor {
-    width: 4.375rem;
-    height: 36px;
-    border-radius: 10px;
-    outline: none;
-    cursor: pointer;
-    font-size: 13px;
-    background: white;
-    border: 1px solid #F9B32C;
+  width: 4.375rem;
+  height: 36px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: 13px;
+  background: white;
+  border: 1px solid #f9b32c;
+  text-align: center;
 }
