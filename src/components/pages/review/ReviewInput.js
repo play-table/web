@@ -7,15 +7,16 @@ import { api } from "../../../common/api/ApiClient";
 import { useParams } from "react-router-dom";
 
 const ReviewInput = () => {
-  const [selectedImages1, setSelectedImages1] = useState([]);
-  const [selectedImages2, setSelectedImages2] = useState([]);
+  const [selectedImages1, setSelectedImages1] = useState([]); // 배열로 초기화
+  const [selectedImages2, setSelectedImages2] = useState([]); // 배열로 초기화
 
   const fileInputRef1 = useRef(null);
   const fileInputRef2 = useRef(null);
   const [rating, setRating] = useState(0);
   const [ratingValueText, setRatingValueText] = useState("0");
   const [reviewText, setReviewText] = useState("");
-  const [storeId] = useParams();
+
+  // const [storeId] = useParams();
 
   const handleImageUpload = (e, setSelectedImages) => {
     try {
@@ -38,7 +39,7 @@ const ReviewInput = () => {
     try {
       // 서버로 리뷰 데이터 전송
       const response = await api(`/api/v1/reviews`, "POST", {
-        storeId: "storeId", // storeId를 사용
+        storeId: "280a8a4d-a27f-4d01-b031-2a003cc4c039", // storeId를 사용
         content: reviewText,
         rating: rating, // 평점 추가
         imgUrl: "asdsads", // 이미지 업로드 로직 필요
@@ -120,16 +121,17 @@ const ReviewInput = () => {
               >
                 사진 업로드
               </button>
-              {selectedImages1.map((image, index) => (
-                <div key={index} className={reviewInputClasses.input_picture}>
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt={`Image ${index}`}
-                    width={100}
-                    height={100}
-                  />
-                </div>
-              ))}
+              {selectedImages1.length > 0 &&
+                selectedImages1.map((image, index) => (
+                  <div key={index} className={reviewInputClasses.input_picture}>
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Image ${index}`}
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                ))}
             </div>
             <div className={reviewInputClasses.input_picture}>
               {" "}
@@ -146,16 +148,17 @@ const ReviewInput = () => {
               >
                 사진 업로드
               </button>
-              {selectedImages2.map((image, index) => (
-                <div key={index} className={reviewInputClasses.input_picture}>
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt={`Image ${index}`}
-                    width={100}
-                    height={100}
-                  />
-                </div>
-              ))}
+              {selectedImages2.length > 0 &&
+                selectedImages2.map((image, index) => (
+                  <div key={index} className={reviewInputClasses.input_picture}>
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Image ${index}`}
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </div>

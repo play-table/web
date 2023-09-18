@@ -10,3 +10,6 @@
   font-weight: 700;
   text-align: center;
 }
+.big_color_btn:hover {
+  background-color: #87b13a;
+}
