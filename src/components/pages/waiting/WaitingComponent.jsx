@@ -6,6 +6,7 @@ import SmallButton from "../../atoms/SmallButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
 import {useNavigate, useParams} from "react-router-dom";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
+import {api} from "../../../common/api/ApiClient";
 
 const WaitingComponent = () => {
   const { page } = useParams(); // URL에서 경로 파라미터를 가져옴
@@ -20,7 +21,7 @@ const WaitingComponent = () => {
   const [isPrevMonth, setIsPrevMonth] = useState(false);
   const [isNextMonth, setIsNextMonth] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
+  const {storeId}=useParams();
 
   useEffect(() => {
     // 경로 파라미터에 따라 switchMenu 상태 변경
@@ -46,6 +47,15 @@ const WaitingComponent = () => {
       setSwitchMenu(true);
     }
   }, [page]);
+
+
+  const putData = async (e) => {
+    const {value} = e.target;
+
+    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {
+
+    }).then(navigate(`/store`))
+  }
 
   function formatDateToYYYYMMDD(dateString) {
     const date = new Date(dateString);
@@ -149,7 +159,7 @@ const WaitingComponent = () => {
               </p>
             </div>
             <div className="reservation_confirm_footBtn">
-              <BigWhiteButton content="웨이팅 취소"></BigWhiteButton>
+              <BigWhiteButton value="CUSTOMER_CANCELED" onClick={putData} content="웨이팅 취소"></BigWhiteButton>
             </div>
           </>
         ) : (

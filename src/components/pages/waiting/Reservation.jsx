@@ -50,7 +50,7 @@ const Reservation = () => {
       // customerName : "이세인",
       status : "WAITING"
     }).then((res) => {
-      navigate(`/waiting/c3d5c454-9682-400e-8cb9-2f8f96128e2c/check?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`);
+      navigate(`/waiting/${storeId}/check?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`);
     }).catch((err) => {
       console.log(err);
     })

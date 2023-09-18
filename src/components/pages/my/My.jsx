@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Menu from "../Layout/menubar/Menubar";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
 import reviewTabClasses from "../../../styles/pages/my/MyprofileReviewTab.module.css";
@@ -13,12 +13,15 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import {api} from "../../../common/api/ApiClient";
 
 const My = () => {
   const nav = useNavigate();
   const [switchMenu, setSwitchMenu] = useState(true);
   const [error, setError] = useState("");
-
+  const [data, setData] = useState([]);
+  const [reserveData, setReserveData] = useState('');
+  const [reviews, setReviews] = useState([]);
   const menuSwitch = (data) => {
     if (data == "res") {
       setSwitchMenu(true);
@@ -28,6 +31,11 @@ const My = () => {
       setError("");
     }
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
 
   const goToStoreReview = (store) => {
     nav(`/review?store=${store}`);
@@ -40,6 +48,13 @@ const My = () => {
   const goToEdit = () => {
     nav("/edit");
   };
+
+  const getData = async () => {
+    const data = await api(`/api/v1/reservation/status`, "GET", {});
+    console.log(data);
+    setReserveData(data);
+  }
+
 
   return (
     <>
@@ -121,72 +136,43 @@ const My = () => {
 
               {switchMenu && (
                 <div className={classes.reservation_list_wrap}>
-                  <div className={classes.reservation_list}>
-                    <div className={classes.reservation_list_num}>
-                      <p>1</p>
-                    </div>
-
-                    <div>
-                      <div
-                        className={classes.reservation_list_store}
-                        onClick={() => goToStoreReview("무탄")}
-                      >
-                        <img
-                          className={classes.store_img}
-                          src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s1048/1048_2112418283224885.jpg?detail750"
-                        />
-                        <div className={classes.reservation_list_store_detail}>
-                          <p style={{ fontWeight: "bold" }}>무탄</p>
-                          <p>일식:경주</p>
+                  {reserveData.length != 0 && reserveData.map((item, idx) => (
+                      <div key={idx} className={classes.reservation_list}>
+                        <div className={classes.reservation_list_num}>
+                          <p>{idx+1}</p>
                         </div>
-                      </div>
-                      <div className={classes.reservation_list_store_contents}>
-                        <p>예약 날짜 : 2023년 9월 3일</p>
-                        <p>예약 시간 : 오후 5:00</p>
-                        <p>예약 인원 : 4명</p>
-                        <p>예약 확인 : 승인</p>
-                      </div>
-                    </div>
-                    <button
-                      className={classes.reveiw_button}
-                      onClick={() => goToReviewInput("무탄")}
-                    >
-                      리뷰쓰기
-                    </button>
-                  </div>
-                  <div className={classes.reservation_list}>
-                    <div className={classes.reservation_list_num}>
-                      <p>1</p>
-                    </div>
 
-                    <div>
-                      <div
-                        className={classes.reservation_list_store}
-                        onClick={() => goToStoreReview("무탄")}
-                      >
-                        <img
-                          className={classes.store_img}
-                          src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s1048/1048_2112418283224885.jpg?detail750"
-                        />
                         <div>
-                          <p>무탄</p>
-                          <p>일식:경주</p>
+                          <div
+                              className={classes.reservation_list_store}
+                              onClick={() => goToStoreReview("무탄")}
+                          >
+                            <img
+                                className={classes.store_img}
+                                src="https://image.toast.com/aaaaaqx/catchtable/shopinfo/s1048/1048_2112418283224885.jpg?detail750"
+                            />
+                            <div>
+                              <p>무탄</p>
+                              <p>일식:경주</p>
+                            </div>
+                          </div>
+                          <div className={classes.reservation_list_store_contents}>
+                            <p>예약자 성함 : {item.customerName} </p>
+                            <p>예약 날짜 : {item.reservationDay} </p>
+                            <p>예약 시간 : {item.reservationTime}</p>
+                            <p>예약 인원 : {item.totalPeople}</p>
+                            <p>예약 확인 : {item.status}</p>
+                          </div>
                         </div>
+                        <button
+                            className={classes.reveiw_button}
+                            onClick={() => goToReviewInput("무탄")}
+                        >
+                          리뷰쓰기
+                        </button>
                       </div>
-                      <div className={classes.reservation_list_store_contents}>
-                        <p>예약 날짜 : 2023년 9월 3일</p>
-                        <p>예약 시간 : 오후 5:00</p>
-                        <p>예약 인원 : 4명</p>
-                        <p>예약 확인 : 승인</p>
-                      </div>
-                    </div>
-                    <button
-                      className={classes.reveiw_button}
-                      onClick={() => goToReviewInput("무탄")}
-                    >
-                      리뷰쓰기
-                    </button>
-                  </div>
+                  ))}
+
                 </div>
               )}
               {!switchMenu && (
