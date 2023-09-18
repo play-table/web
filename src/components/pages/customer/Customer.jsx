@@ -1,36 +1,43 @@
-import React, { useState } from "react";
-import axios from "axios"; // axios 라이브러리를 import
+import React, {useState} from "react";
 import BigOrangeButton from "../../atoms/BigOrangeButton";
 import styles from "../../../styles/pages/customer/Customer.module.css";
-import { api } from "../../../common/api/ApiClient";
+import {api} from "../../../common/api/ApiClient";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import axios from "axios";
 
-const Customer = () => {
+const Customer = ({token}) => {
+  console.log({token})
+  const [searchParams, setSearchParams] = useSearchParams();
+  const nav = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    realName: "",
     contact: "",
     nickName: "",
-    profileUrl: "",
-    isStoreOwner: false,
+    profileImage: ""
   });
+  const [role, setRole] = useState('CUSTOMER')
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const requestData = {
-        name: formData.name,
+        realName: formData.realName,
         contact: formData.contact,
         nickName: formData.nickName,
-        profileUrl: formData.profileUrl,
+        profileImage: formData.profileImage,
+        role:role
       };
 
       // api 함수를 사용하여 데이터를 보냅니다.
-      const response = await api("/api/v1/customers", "post", requestData);
+      // await api("/api/v1/member/join", "post", requestData);
+      const {data} = await axios.post(`/api/v1/member/join`, requestData, {headers:{
+        Authorization:`Bearer ${token}`
+        }})
 
-      console.log("API 호출 성공", response);
+      localStorage.setItem('token', data.token);
+      nav(data.redirect);
 
-      // 뒤로가기 버튼 클릭 시 이전 페이지로 이동
-      window.history.back();
     } catch (error) {
       console.error("API 호출 오류", error);
     }
@@ -58,9 +65,9 @@ const Customer = () => {
               <span className={styles.customer_text}>이름</span>
               <input
                 type="text"
-                name="name"
+                name="realName"
                 placeholder="예약할 때 사용할 이름이므로 실명을 사용해 주세요."
-                value={formData.name}
+                value={formData.realName}
                 onChange={handleInputChange}
                 className={styles.input}
               />
@@ -91,7 +98,6 @@ const Customer = () => {
             <div className={styles.insert_box}>
               <span className={styles.customer_text}>프로필 이미지</span>
               <input
-                type="url"
                 name="profileUrl"
                 value={formData.profileUrl}
                 onChange={handleInputChange}
@@ -103,8 +109,7 @@ const Customer = () => {
               <input
                 type="checkbox"
                 name="isStoreOwner"
-                checked={formData.isStoreOwner}
-                onChange={handleInputChange}
+                onChange={()=>setRole('OWNER')}
                 id={styles.checkbox}
               />
               <label

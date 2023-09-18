@@ -17,6 +17,7 @@ import Customer from "./components/pages/customer/Customer";
 import Owner from "./components/pages/owner/Owner";
 import InputMenu from "./components/pages/inputMenu/InputMenu";
 import InputStore from "./components/pages/inputStore/InputStore";
+import AuthCheck from "./components/pages/customer/AuthCheck";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "/inputStore",
         element: <InputStore />,
+      },
+      {
+        path: "/auth",
+        element: <AuthCheck />,
       },
     ],
   },
