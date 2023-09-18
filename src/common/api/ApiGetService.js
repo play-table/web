@@ -1,3 +1,3 @@
-import {apiClient} from "./ApiClient";
+import { apiClient } from "./ApiClient";
 
-export const mbtiResult = () => apiClient.get('/questions/results')
+export const mbtiResult = () => apiClient.get("/questions/results");
