@@ -79,7 +79,6 @@ const WaitingComponent = () => {
     return `${year}년 ${month}월 ${day}일`;
   };
 
-
   function formatDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();

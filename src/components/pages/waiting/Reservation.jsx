@@ -28,7 +28,6 @@ const Reservation = () => {
   }
   const putData = async (e) => {
     const {value} = e.target;
-
     await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {})
   }
 
@@ -72,91 +71,43 @@ const Reservation = () => {
   }
 
 
-//   // 예약 상태를 나타내는 상태 변수
-//   const [moreTimes, setMoreTimes] = useState([]);
-//
-//   function generateReservationTimes(openTime, closeTime, interval){
-//     const times = [];
-//     let reservationTimes = openTime;
-//     while (1 <= 4) {
-//       times.push({time: reservationTimes, selected: false})
-//       // 예약 시간을 증가시킴
-//       const [hours, minutes] = reservationTimes.split(":").map(Number);
-//       const totalMinutes = hours * 60 + minutes + interval;
-//       const newHours = Math.floor(totalMinutes / 60);
-//       const newMinutes = totalMinutes % 60;
-//
-//       reservationTimes = `${String(newHours).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
-//     };
-//     return times; // 상태 변경을 위한 반환 값
-//   };
-//
-// // 예약 시간 생성 및 설정
-//     const openTime = "8:00";
-//     const closeTime = "22:00";
-//     const interval = 30; // 분 단위 간격
-//
-// // generateReservationTimes 함수의 반환 값을 사용하여 상태를 설정
-//   const generatedTimes = generateReservationTimes(openTime, closeTime, interval);
-//   setMoreTimes(generatedTimes);
-
-  const dateToString = (time) => Number(time.time.split(":")[1]) + (time.time.split(":")[0]==="30" ? 0.5 : 0)
+  // 예약 시간 선택 리스트
+  const [moreTimes, setMoreTimes] = useState([]);
+  const dateToString = (time) => Number(time.time.split(":")[0]) + (time.time.split(":")[1]==="30" ? 0.5 : 0)
 
   const initTimeset = (startTime,endTime)=>{
-
     const s = dateToString(startTime);
     const e = dateToString(endTime);
-
-    const list = []
+    const reservationTimeList = []
     for(let i= s; i <= e;  i += 0.5){
       const t = (i+"").split(".");
-      const time = t[0] + t.length === 2?"?30":":00" ;
-      list.push({ time, selected: false})
+      const time = t[0] + (t.length === 2?":30":":00");
+      reservationTimeList.push({time, selected: false});
     }
-    console.log(list)
-
+    console.log(reservationTimeList);
+    setMoreTimes(reservationTimeList);
   }
+
+  // 인원 선택 리스트
+  const [morePeople, setMorePeople] = useState([]);
+  const reservationPeopleList = [];
+
+  const initPeopleSet = (reservationPeople) => {
+    for (let people= 1; people<=reservationPeople; people++) {
+      reservationPeopleList.push({people,  selected: false})
+    }
+    console.log(reservationPeopleList);
+    setMorePeople(reservationPeopleList);
+  }
+
   useEffect(()=>{
     const startTime = {time: "5:30"}
     const endTime = {time: "22:30"}
+    const reservationPeople = {people: 9}
     initTimeset(startTime,endTime)
+    initPeopleSet(reservationPeople.people)
   },[])
-  const [moreTimes, setMoreTimes] = useState([
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false },
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false },
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false },
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false },
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false },
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false }
-    // 여기에 더 많은 시간 버튼을 추가하세요
-  ]);
 
-
-  // 더 많은 인원을 나타내는 버튼 상태 변수
-  const [morePeople, setMorePeople] = useState([
-    { people: 1, selected: false },
-    { people: 2, selected: false },
-    { people: 3, selected: false },
-    { people: 1, selected: false },
-    { people: 2, selected: false },
-    { people: 3, selected: false },
-    { people: 1, selected: false },
-    { people: 2, selected: false },
-    { people: 3, selected: false },
-    { people: 1, selected: false },
-    { people: 2, selected: false },
-    { people: 3, selected: false },
-    { people: 1, selected: false },
-    { people: 2, selected: false },
-    { people: 3, selected: false }
-    // 여기에 더 많은 인원 버튼을 추가하세요
-  ]);
 
   // 시간 버튼 클릭 핸들러
   const handleTimeButtonClick = (index) => {
@@ -164,7 +115,6 @@ const Reservation = () => {
     const updatedTimes = [...moreTimes];
     updatedTimes[index].selected = !updatedTimes[index].selected;
     setMoreTimes(updatedTimes);
-
   };
 
   // 인원 버튼 클릭 핸들러
