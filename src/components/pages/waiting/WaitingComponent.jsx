@@ -89,6 +89,21 @@ const WaitingComponent = () => {
     return `${year}년 ${month}월 ${day}일`;
   }
 
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    getData()
+  },[]);
+  const { storeId } = useParams();
+  const getData = async () => {
+    const data = await api(`/api/v1/waiting/${storeId}`, "GET", {})
+    setData(data);
+  }
+
+  const putData = async (e) => {
+    const {value} = e.target
+    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+  }
+
   return (
     <>
       <div className="waiting_check_container">
