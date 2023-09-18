@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
 import Calendar from "../../atoms/Calander";
 import RoundButton from "../../atoms/RoundButton";
 import SmallButton from "../../atoms/SmallButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
-import {api} from "../../../common/api/ApiClient";
+import { api } from "../../../common/api/ApiClient";
 
 const WaitingComponent = () => {
   const { page } = useParams(); // URL에서 경로 파라미터를 가져옴
@@ -15,13 +15,14 @@ const WaitingComponent = () => {
   const [switchMenu, setSwitchMenu] = useState(true);
   const [error, setError] = useState("");
   const [selectedDay, setSelectedDay] = useState(null);
-  const [day, setDay] = useState('');
-  const [time, setTime] = useState('');
-  const [people, setPeople] = useState('');
+  const [day, setDay] = useState("");
+  const [time, setTime] = useState("");
+  const [people, setPeople] = useState("");
   const [isPrevMonth, setIsPrevMonth] = useState(false);
   const [isNextMonth, setIsNextMonth] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const {storeId}=useParams();
+
+  // const { storeId } = useParams();
 
   useEffect(() => {
     // 경로 파라미터에 따라 switchMenu 상태 변경
@@ -32,14 +33,14 @@ const WaitingComponent = () => {
     const urlParams = new URLSearchParams(window.location.search);
 
     // 특정 파라미터 가져오기
-    const paramName = 'day'; // 가져올 파라미터 이름
-    const paramName2 = 'time'; // 가져올 파라미터 이름
-    const paramName3 = 'people'; // 가져올 파라미터 이름
+    const paramName = "day"; // 가져올 파라미터 이름
+    const paramName2 = "time"; // 가져올 파라미터 이름
+    const paramName3 = "people"; // 가져올 파라미터 이름
     setDay(urlParams.get(paramName));
     setTime(urlParams.get(paramName2));
     setPeople(urlParams.get(paramName3));
 
-    setSelectedDate(new Date(formatDateToYYYYMMDD(urlParams.get(paramName))))
+    setSelectedDate(new Date(formatDateToYYYYMMDD(urlParams.get(paramName))));
 
     if (page === "switch") {
       setSwitchMenu(false);
@@ -48,20 +49,11 @@ const WaitingComponent = () => {
     }
   }, [page]);
 
-
-  const putData = async (e) => {
-    const {value} = e.target;
-
-    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {
-
-    }).then(navigate(`/store`))
-  }
-
   function formatDateToYYYYMMDD(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
 
     return `${year}-${month}-${day}`;
   }
@@ -92,27 +84,27 @@ const WaitingComponent = () => {
   function formatDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
 
     return `${year}년 ${month}월 ${day}일`;
   }
 
   const [data, setData] = useState([]);
-  useEffect(()=>{
-    getData()
-  },[]);
+  useEffect(() => {
+    getData();
+  }, []);
   const { storeId } = useParams();
   const getData = async () => {
-    const data = await api(`/api/v1/waiting/${storeId}`, "GET", {})
+    const data = await api(`/api/v1/waiting/${storeId}`, "GET", {});
     setData(data);
-  }
+  };
 
   const putData = async (e) => {
-    const {value} = e.target
-    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+    const { value } = e.target;
+    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {});
     handleButtonClick();
-  }
+  };
 
   return (
     <>
@@ -164,7 +156,7 @@ const WaitingComponent = () => {
               <SmallButton content={time} type="orange"></SmallButton>
             </div>
             <div className="reservation_confirm_btn">
-              <RoundButton content={people + '명'} type="click" />
+              <RoundButton content={people + "명"} type="click" />
             </div>
             <div className="reservation_confirm_content">
               <p className="reservation_confirm_content_font">주의사항</p>
@@ -175,7 +167,11 @@ const WaitingComponent = () => {
               </p>
             </div>
             <div className="reservation_confirm_footBtn">
-              <BigWhiteButton value="CUSTOMER_CANCELED" onClick={putData} content="웨이팅 취소"></BigWhiteButton>
+              <BigWhiteButton
+                value="CUSTOMER_CANCELED"
+                onClick={putData}
+                content="웨이팅 취소"
+              ></BigWhiteButton>
             </div>
           </>
         ) : (
@@ -189,7 +185,7 @@ const WaitingComponent = () => {
             </div>
             <div className="waiting_check_main2">
               <p className="waiting_check_sub_font2">현재 대기중인 팀 </p>
-              <p className="waiting_check_sub_font2"> {data-1}팀</p>
+              <p className="waiting_check_sub_font2"> {data - 1}팀</p>
             </div>
             <div className="waiting_check_sub">
               <BigWhiteButton

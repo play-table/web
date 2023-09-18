@@ -28,9 +28,8 @@ const Reservation = () => {
     setData(data);
   };
   const putData = async (e) => {
-
-    const {value} = e.target;
-    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {})
+    const { value } = e.target;
+    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {});
     await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {});
   };
 
@@ -44,19 +43,22 @@ const Reservation = () => {
       formattedDate = `${year}-${month}-${day}`;
     }
 
-
-      api('/api/v1/reservation/c3d5c454-9682-400e-8cb9-2f8f96128e2c', "POST",{
-      reservationDay : formattedDate,
-      reservationTime : formatTime(moreTimes[isTimeIdx].time),
-      totalPeople : morePeople[isHumanIdx].people,
+    api("/api/v1/reservation/c3d5c454-9682-400e-8cb9-2f8f96128e2c", "POST", {
+      reservationDay: formattedDate,
+      reservationTime: formatTime(moreTimes[isTimeIdx].time),
+      totalPeople: morePeople[isHumanIdx].people,
       // customerId : "550e8400-e29b-41d4-a716-446655440000",
       // customerName : "이세인",
-      status : "WAITING"
-    }).then((res) => {
-      navigate(`/waiting/${storeId}/check?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`);
-    }).catch((err) => {
-      console.log(err);
+      status: "WAITING",
     })
+      .then((res) => {
+        navigate(
+          `/waiting/${storeId}/check?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
@@ -76,43 +78,41 @@ const Reservation = () => {
     Number(time.time.split(":")[1]) +
     (time.time.split(":")[0] === "30" ? 0.5 : 0);
 
-
   // 예약 시간 선택 리스트
   const [moreTimes, setMoreTimes] = useState([]);
-  const dateToString = (time) => Number(time.time.split(":")[0]) + (time.time.split(":")[1]==="30" ? 0.5 : 0)
 
-  const initTimeset = (startTime,endTime)=>{
+  const initTimeset = (startTime, endTime) => {
     const s = dateToString(startTime);
     const e = dateToString(endTime);
-    const reservationTimeList = []
-    for(let i= s; i <= e;  i += 0.5){
-      const t = (i+"").split(".");
-      const time = t[0] + (t.length === 2?":30":":00");
-      reservationTimeList.push({time, selected: false});
+    const reservationTimeList = [];
+    for (let i = s; i <= e; i += 0.5) {
+      const t = (i + "").split(".");
+      const time = t[0] + (t.length === 2 ? ":30" : ":00");
+      reservationTimeList.push({ time, selected: false });
     }
     console.log(reservationTimeList);
     setMoreTimes(reservationTimeList);
-  }
+  };
 
   // 인원 선택 리스트
   const [morePeople, setMorePeople] = useState([]);
   const reservationPeopleList = [];
 
   const initPeopleSet = (reservationPeople) => {
-    for (let people= 1; people<=reservationPeople; people++) {
-      reservationPeopleList.push({people,  selected: false})
+    for (let people = 1; people <= reservationPeople; people++) {
+      reservationPeopleList.push({ people, selected: false });
     }
     console.log(reservationPeopleList);
     setMorePeople(reservationPeopleList);
-  }
+  };
 
-  useEffect(()=>{
-    const startTime = {time: "5:30"}
-    const endTime = {time: "22:30"}
-    const reservationPeople = {people: 9}
-    initTimeset(startTime,endTime)
-    initPeopleSet(reservationPeople.people)
-  },[])
+  useEffect(() => {
+    const startTime = { time: "5:30" };
+    const endTime = { time: "22:30" };
+    const reservationPeople = { people: 9 };
+    initTimeset(startTime, endTime);
+    initPeopleSet(reservationPeople.people);
+  }, []);
 
   const handleTimeButtonClick = (index) => {
     setIsTimeIdx(index);
