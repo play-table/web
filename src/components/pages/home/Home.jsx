@@ -14,7 +14,7 @@ const Home = () => {
       <div className={styles.button_container}>
         <ServiceButton
           content="Resevation"
-          redirect="/search?category=reservation"
+          redirect="/reservation/:storeId"
         />
         <ServiceButton
           content="Online Waitng"

@@ -10,7 +10,7 @@ import ReviewInput from "./components/pages/review/ReviewInput";
 import Edit from "./components/pages/my/Edit";
 import WaitingHome from "./components/pages/waiting/WaitingHome";
 import Reservation from "./components/pages/waiting/Reservation";
-import ReservationOner from "./components/pages/waiting/ReservationOner";
+import ReservationOwner from "./components/pages/waiting/ReservationOwner";
 import WaitingOner from "./components/pages/waiting/WaitingOner";
 import WaitingComponent from "./components/pages/waiting/WaitingComponent";
 import Customer from "./components/pages/customer/Customer";
@@ -52,12 +52,12 @@ const router = createBrowserRouter([
         element: <WaitingHome />,
       },
       {
-        path: "/reservation",
+        path: "/reservation/:storeId",
         element: <Reservation />,
       },
       {
-        path: "/reservation3",
-        element: <ReservationOner />,
+        path: "/reservation/owner/:storeId",
+        element: <ReservationOwner />,
       },
       {
         path: "/waiting/owner/:storeId",

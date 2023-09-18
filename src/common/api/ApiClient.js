@@ -9,3 +9,4 @@ export const api = async (url, method, data) => {
     })
     return body.data
 }
+

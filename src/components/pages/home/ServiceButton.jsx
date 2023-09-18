@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 const ServiceButton = ({ content, redirect }) => {
   const nav = useNavigate();
 
-  const onClickHandelr = () => nav(redirect);
+  const onClickHandler = () => nav(redirect);
 
   return (
-    <button onClick={onClickHandelr} className={styles.button_wrap}>
+    <button onClick={onClickHandler} className={styles.button_wrap}>
       {content}
     </button>
   );

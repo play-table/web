@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SmallButton from "../../atoms/SmallButton";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
-import styles from "../../../styles/pages/waiting/ReservationOner.css";
+import styles from "../../../styles/pages/waiting/ReservationOwner.css";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
 
-const ReservationOner = () => {
+const ReservationOwner = () => {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,10 +49,10 @@ const ReservationOner = () => {
 
   return (
     <>
-      <div className="reservation_oner_container">
+      <div className="reservation_owner_container">
         <MiniStoreInfo />
-        <div className="reservation_oner_content">
-          <span className="reservation_oner_content_font">
+        <div className="reservation_owner_content">
+          <span className="reservation_owner_content_font">
             {getCurrentDate()}
           </span>
         </div>
@@ -60,17 +60,17 @@ const ReservationOner = () => {
           <p>Loading...</p>
         ) : (
           reservations.map((reservation) => (
-            <div key={reservation.id} className="reservation_oner_main">
-              <span className="reservation_oner_main_font">
+            <div key={reservation.id} className="reservation_owner_main">
+              <span className="reservation_owner_main_font">
                 {reservation.id}
               </span>
-              <span className="reservation_oner_main_font">
+              <span className="reservation_owner_main_font">
                 {reservation.name}
               </span>
-              <span className="reservation_oner_main_font">
+              <span className="reservation_owner_main_font">
                 {reservation.numberOfPeople}명
               </span>
-              <span className="reservation_oner_main_font">
+              <span className="reservation_owner_main_font">
                 {reservation.time}
               </span>
               {!reservation.approved && (
@@ -90,7 +90,7 @@ const ReservationOner = () => {
             </div>
           ))
         )}
-        <div className="reservation_oner_main_btn">
+        <div className="reservation_owner_main_btn">
           <BigWhiteButton content="닫기" />
         </div>
       </div>
@@ -98,4 +98,4 @@ const ReservationOner = () => {
   );
 };
 
-export default ReservationOner;
+export default ReservationOwner;
