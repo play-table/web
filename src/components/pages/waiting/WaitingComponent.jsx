@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
 import Calendar from "../../atoms/Calander";
 import RoundButton from "../../atoms/RoundButton";
 import SmallButton from "../../atoms/SmallButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
-import { useParams } from "react-router-dom";
-import styles from "../../../styles/pages/waiting/CheckMain.css";
-import {api} from "../../../common/api/ApiClient";
 
 const WaitingComponent = () => {
   const { page } = useParams(); // URL에서 경로 파라미터를 가져옴
@@ -81,7 +78,6 @@ const WaitingComponent = () => {
     const day = currentDate.getDate().toString().padStart(2, "0");
     return `${year}년 ${month}월 ${day}일`;
   };
-
 
 
   function formatDate(dateString) {
@@ -179,16 +175,14 @@ const WaitingComponent = () => {
               <span className="waiting_check_main_font">내 웨이팅 번호</span>
             </div>
             <div className="waiting_check_main2">
-              <span className="waiting_check_sub_font">{data}번</span>
+              <span className="waiting_check_sub_font">31번</span>
             </div>
             <div className="waiting_check_main2">
               <p className="waiting_check_sub_font2">현재 대기중인 팀 </p>
-              <p className="waiting_check_sub_font2"> {data-1}팀</p>
+              <p className="waiting_check_sub_font2"> 30팀</p>
             </div>
             <div className="waiting_check_sub">
               <BigWhiteButton
-                value="CUSTOMER_CANCEL"
-                onClic={putData}
                 content="웨이팅 취소"
                 onClickHandler={handleButtonClick}
               ></BigWhiteButton>
