@@ -72,8 +72,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 122px;
+  margin-top: 60px;
   margin-bottom: 70px;
+}
+.button_review_input_line:hover {
+  background-color: #79d027;
 }
 
 .button_review_input {
@@ -82,6 +85,7 @@
   background: none;
   cursor: pointer;
 }
+
 .rating_text {
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;

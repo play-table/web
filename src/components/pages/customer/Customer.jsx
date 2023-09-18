@@ -10,6 +10,7 @@ const Customer = () => {
     contact: "",
     nickName: "",
     profileUrl: "",
+    isStoreOwner: false,
   });
 
   const handleSubmit = async (e) => {
@@ -36,12 +37,13 @@ const Customer = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
+    setFormData({ ...formData, [name]: inputValue });
   };
 
   return (
-    <div className="customer_container">
+    <div className={styles.customer_container}>
       <button
         className={styles.customer_button}
         onClick={() => window.history.back()}
@@ -49,51 +51,69 @@ const Customer = () => {
         <span>←</span> 뒤로가기
       </button>
       <div className={styles.customer_wrap}>
-        <span>내 정보 입력</span>
-        <form onSubmit={handleSubmit}>
+        <span>회원정보 입력</span>
+        <form className={styles.customer_form} onSubmit={handleSubmit}>
           <div className={styles.insert_wrap}>
             <div className={styles.insert_box}>
-              <span>이름</span>
+              <span className={styles.customer_text}>이름</span>
               <input
                 type="text"
                 name="name"
                 placeholder="예약할 때 사용할 이름이므로 실명을 사용해 주세요."
                 value={formData.name}
                 onChange={handleInputChange}
+                className={styles.input}
               />
             </div>
 
             <div className={styles.insert_box}>
-              <span>휴대폰 번호</span>
+              <span className={styles.customer_text}>휴대폰 번호</span>
               <input
                 type="text"
                 name="contact"
                 value={formData.contact}
                 onChange={handleInputChange}
+                className={styles.input}
               />
             </div>
 
             <div className={styles.insert_box}>
-              <span>닉네임</span>
+              <span className={styles.customer_text}>닉네임</span>
               <input
                 type="text"
                 name="nickName"
                 value={formData.nickName}
                 onChange={handleInputChange}
+                className={styles.input}
               />
             </div>
 
             <div className={styles.insert_box}>
-              <span>프로필 이미지</span>
+              <span className={styles.customer_text}>프로필 이미지</span>
               <input
                 type="url"
                 name="profileUrl"
                 value={formData.profileUrl}
                 onChange={handleInputChange}
+                className={styles.input}
               />
             </div>
+            <div className={styles.customer_check_container}>
+              <span className={styles.customer_check_text}>점주</span>
+              <input
+                type="checkbox"
+                name="isStoreOwner"
+                checked={formData.isStoreOwner}
+                onChange={handleInputChange}
+                id={styles.checkbox}
+              />
+              <label
+                htmlFor={styles.checkbox}
+                className={styles.customCheckbox}
+              ></label>
+            </div>
           </div>
-          <BigOrangeButton type="submit" content="정보 입력" />
+          <BigOrangeButton type="submit" content="시작하기" />
         </form>
       </div>
     </div>

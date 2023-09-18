@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import editClasses from "../../../styles/pages/my/Edit.module.css";
 import reviewInputClasses from "../../../styles/pages/review/ReviewInput.module.css";
-
+import styles from "../../../styles/pages/customer/Customer.module.css";
 import MyInfo from "./MyInfo";
 import { useParams } from "react-router-dom";
 import { api } from "../../../common/api/ApiClient";
@@ -87,53 +87,66 @@ const Edit = () => {
       <div className={editClasses.header}>
         <h1>내 정보 관리</h1>
       </div>
-      <p className={editClasses.input_title}>이름</p>
-      <MyInfo value={formData.name} onChange={handleInputChange} />
+      <form className={styles.customer_form} onSubmit={putData}>
+        <div className={styles.insert_wrap}>
+          <div className={styles.insert_box}>
+            <span className={styles.customer_text}>이름</span>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className={styles.input}
+            />
+          </div>
 
-      <div className={editClasses.input_section}>
-        <p className={editClasses.input_title}>닉네임</p>
-        <input
-          className={editClasses.input_info}
-          value={formData.nickName}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className={editClasses.input_section}>
-        <p className={editClasses.input_title}>이메일 주소</p>
-        <input
-          className={editClasses.input_info}
-          placeholder={"aaa@naver.com"}
-        />
-      </div>
-      <div className={editClasses.input_section}>
-        <p className={editClasses.input_title}>휴대폰 번호</p>
-        <input
-          className={editClasses.input_info}
-          value={formData.contact}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className={editClasses.input_section}>
-        <p className={editClasses.input_title}>비밀번호</p>
-        <input
-          className={editClasses.input_info}
-          placeholder={"새로운 비밀번호로 변경 가능"}
-        />
-      </div>
+          <div className={styles.insert_box}>
+            <span className={styles.customer_text}>닉네임</span>
+            <input
+              type="text"
+              name="nickName"
+              value={formData.nickName}
+              onChange={handleInputChange}
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.insert_box}>
+            <p className={styles.customer_text}>이메일 주소</p>
+            <input className={styles.input} placeholder={"aaa@naver.com"} />
+          </div>
+          <div className={styles.insert_box}>
+            <p className={styles.customer_text}>휴대폰 번호</p>
+            <input
+              type="text"
+              name="contact"
+              className={styles.input}
+              value={formData.contact}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className={styles.insert_box}>
+            <p className={styles.customer_text}>비밀번호</p>
+            <input
+              className={styles.input}
+              placeholder={"새로운 비밀번호로 변경 가능"}
+            />
+          </div>
+        </div>
 
-      <div className={reviewInputClasses.button_review_input_line}>
-        <button
-          className={reviewInputClasses.button_review_input}
-          onClick={putData}
-        >
-          내 정보 수정
-        </button>
-      </div>
+        <div className={reviewInputClasses.button_review_input_line}>
+          <button
+            className={reviewInputClasses.button_review_input}
+            type="submit"
+          >
+            내 정보 수정
+          </button>
+        </div>
 
-      <div className={editClasses.button_area}>
-        <p>회원탈퇴</p>
-        <p>로그아웃</p>
-      </div>
+        <div className={editClasses.button_area}>
+          <p>회원탈퇴</p>
+          <p>로그아웃</p>
+        </div>
+      </form>
     </div>
   );
 };
