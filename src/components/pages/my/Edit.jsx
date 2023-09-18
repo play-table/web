@@ -1,46 +1,141 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import editClasses from "../../../styles/pages/my/Edit.module.css";
 import reviewInputClasses from "../../../styles/pages/review/ReviewInput.module.css";
 
 import MyInfo from "./MyInfo";
+import { useParams } from "react-router-dom";
+import { api } from "../../../common/api/ApiClient";
 
 const Edit = () => {
-    return (
-        <div className={editClasses.edit_wrap}>
-            <div className={editClasses.header}>
-                <h1>내 정보 관리</h1>
-            </div>
+  const [formData, setFormData] = useState({
+    name: "",
+    nickName: "",
+    email: "",
+    contact: "",
+    password: "",
+  });
 
-            <MyInfo value="이름" placeholder="김지혜" />
+  const { userId } = useParams();
 
-            <div className={editClasses.input_section}>
-                <p className={editClasses.input_title}>닉네임</p>
-                <input className={editClasses.input_info} placeholder={"발랄한 맛사냥꾼"}/>
-            </div>
-            <div className={editClasses.input_section}>
-                <p className={editClasses.input_title}>이메일 주소</p>
-                <input className={editClasses.input_info} placeholder={"aaa@naver.com"}/>
-            </div>
-            <div className={editClasses.input_section}>
-                <p className={editClasses.input_title}>휴대폰 번호</p>
-                <input className={editClasses.input_info} placeholder={"010-2222-2222"}/>
-            </div>
-            <div className={editClasses.input_section}>
-                <p className={editClasses.input_title}>비밀번호</p>
-                <input className={editClasses.input_info} placeholder={"새로운 비밀번호로 변경 가능"}/>
-            </div>
+  const fetchUserData = async () => {
+    try {
+      const response = await api(`/api/v1/customers/${userId}`, "GET");
+      return response.data; // 사용자 데이터 반환
+    } catch (error) {
+      console.error("사용자 데이터를 가져오는데 실패했습니다.", error);
+      throw error;
+    }
+  };
 
-            <div className={reviewInputClasses.button_review_input_line}>
-                <button className={reviewInputClasses.button_review_input}>내 정보 수정</button>
-            </div>
+  useEffect(() => {
+    // 데이터를 가져와서 formData를 업데이트
+    const getUserData = async () => {
+      try {
+        const userData = await fetchUserData(userId); // 데이터를 비동기로 가져옴
 
-            <div className={editClasses.button_area}>
-                <p>회원탈퇴</p>
-                <p>로그아웃</p>
-            </div>
+        setFormData({
+          name: userData.name || "", // userData.name이 없을 경우 빈 문자열로 설정
+          nickName: userData.nickName || "",
+          email: "", // 이메일 데이터를 가져오지 않는 경우 빈 문자열로 설정
+          contact: userData.contact || "",
+          password: "",
+        });
+      } catch (error) {
+        console.error("내 정보 가져오기 오류", error);
+      }
+    };
 
-        </div>
-    );
+    getUserData(); // getUserData 함수 호출
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
+
+  const putData = async () => {
+    try {
+      const requestData = {
+        name: formData.name,
+        nickName: formData.nickName,
+        contact: formData.contact,
+      };
+
+      // PUT 요청을 사용하여 데이터를 업데이트합니다.
+      await api(`/api/v1/customers/${userId}`, "PUT", requestData);
+
+      // 수정이 완료되면 성공 메시지를 표시하거나 다른 조치를 취할 수 있습니다.
+      console.log("내 정보 수정이 완료되었습니다.");
+
+      // 뒤로가기 버튼 클릭 시 이전 페이지로 이동
+      window.history.back();
+    } catch (error) {
+      console.error("내 정보 수정 오류", error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  return (
+    <div className={editClasses.edit_wrap}>
+      <button
+        className={editClasses.edit_button}
+        onClick={() => window.history.back()}
+      >
+        <span>←</span> 뒤로가기
+      </button>
+      <div className={editClasses.header}>
+        <h1>내 정보 관리</h1>
+      </div>
+      <p className={editClasses.input_title}>이름</p>
+      <MyInfo value={formData.name} onChange={handleInputChange} />
+
+      <div className={editClasses.input_section}>
+        <p className={editClasses.input_title}>닉네임</p>
+        <input
+          className={editClasses.input_info}
+          value={formData.nickName}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className={editClasses.input_section}>
+        <p className={editClasses.input_title}>이메일 주소</p>
+        <input
+          className={editClasses.input_info}
+          placeholder={"aaa@naver.com"}
+        />
+      </div>
+      <div className={editClasses.input_section}>
+        <p className={editClasses.input_title}>휴대폰 번호</p>
+        <input
+          className={editClasses.input_info}
+          value={formData.contact}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className={editClasses.input_section}>
+        <p className={editClasses.input_title}>비밀번호</p>
+        <input
+          className={editClasses.input_info}
+          placeholder={"새로운 비밀번호로 변경 가능"}
+        />
+      </div>
+
+      <div className={reviewInputClasses.button_review_input_line}>
+        <button
+          className={reviewInputClasses.button_review_input}
+          onClick={putData}
+        >
+          내 정보 수정
+        </button>
+      </div>
+
+      <div className={editClasses.button_area}>
+        <p>회원탈퇴</p>
+        <p>로그아웃</p>
+      </div>
+    </div>
+  );
 };
 
 export default Edit;
