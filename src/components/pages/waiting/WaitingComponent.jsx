@@ -91,6 +91,7 @@ const WaitingComponent = () => {
     const day = date.getDate().toString().padStart(2, '0');
 
     return `${year}년 ${month}월 ${day}일`;
+  }
 
   const [data, setData] = useState([]);
   useEffect(()=>{
