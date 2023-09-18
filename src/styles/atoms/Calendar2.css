@@ -6,7 +6,7 @@
   background-color: #f4f4f4;
   border: 1px solid #ccc;
   box-shadow: 0 0 5px rgba(175, 85, 85, 0.1);
-  margin: 0 auto;
+  margin-bottom: 23px;
   padding: 20px;
 }
 
@@ -84,16 +84,6 @@ td.prevDay {
 
 td.futureDay {
   color: #000;
-}
-
-td.futureDay.choiceDay {
-  background-color: #3ccb4f;
-  color: white;
-}
-
-td:hover {
-  background-color: #4fb732;
-  color: white;
 }
 
 button.prevMonth-button,

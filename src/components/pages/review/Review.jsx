@@ -10,16 +10,7 @@ import { useParams } from "react-router-dom";
 const Review = () => {
   const [data, setData] = useState([]);
   const { storeId } = useParams();
-  const postData = async () => {
-    const data = await api(`/api/v1/reviews`, "POST", {
-      storeId: "280a8a4d-a27f-4d01-b031-2a003cc4c039",
-      reservationSituationId: "280a8a4d-a27f-4d01-b031-2a003cc4c039",
-      customerId: "280a8a4d-a27f-4d01-b031-2a003cc4c039",
-      rating: "4",
-      content: "안녕하세요",
-      imgUrl: "asdsads",
-    });
-  };
+
   const getData = async () => {
     const data = await api(`/api/v1/reviews/${storeId}`, "GET", {});
     setData(data);
