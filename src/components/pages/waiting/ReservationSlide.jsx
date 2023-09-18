@@ -11,6 +11,7 @@ const ReservationSlide = ({ items, itemsPerPage, renderItem }) => {
     (currentPage + 1) * itemsPerPage
   );
 
+
   const goToPrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);

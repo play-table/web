@@ -61,11 +61,11 @@ const router = createBrowserRouter([
         element: <ReservationOwner />,
       },
       {
-        path: "/waiting/owner/:storeId",
+        path: "/waiting/:storeId/owner",
         element: <WaitingOner />,
       },
       {
-        path: "/waiting/check/:storeId",
+        path: "/waiting/:storeId/check",
         element: <WaitingComponent />,
       },
       {

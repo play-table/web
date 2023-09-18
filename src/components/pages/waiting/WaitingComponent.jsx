@@ -21,7 +21,7 @@ const WaitingComponent = () => {
   const [isPrevMonth, setIsPrevMonth] = useState(false);
   const [isNextMonth, setIsNextMonth] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
+  const {storeId}=useParams();
 
   useEffect(() => {
     // 경로 파라미터에 따라 switchMenu 상태 변경
@@ -48,6 +48,15 @@ const WaitingComponent = () => {
     }
   }, [page]);
 
+
+  const putData = async (e) => {
+    const {value} = e.target;
+
+    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {
+
+    }).then(navigate(`/store`))
+  }
+
   function formatDateToYYYYMMDD(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -69,7 +78,7 @@ const WaitingComponent = () => {
 
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
-    navigate(-1); // 혹은 다른 작업 수행
+    navigate(`/store`); // 혹은 다른 작업 수행
   };
 
   const getCurrentDate = () => {
@@ -79,7 +88,6 @@ const WaitingComponent = () => {
     const day = currentDate.getDate().toString().padStart(2, "0");
     return `${year}년 ${month}월 ${day}일`;
   };
-
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -103,6 +111,7 @@ const WaitingComponent = () => {
   const putData = async (e) => {
     const {value} = e.target
     await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+    handleButtonClick();
   }
 
   return (
@@ -166,7 +175,7 @@ const WaitingComponent = () => {
               </p>
             </div>
             <div className="reservation_confirm_footBtn">
-              <BigWhiteButton content="웨이팅 취소"></BigWhiteButton>
+              <BigWhiteButton value="CUSTOMER_CANCELED" onClick={putData} content="웨이팅 취소"></BigWhiteButton>
             </div>
           </>
         ) : (
@@ -176,16 +185,17 @@ const WaitingComponent = () => {
               <span className="waiting_check_main_font">내 웨이팅 번호</span>
             </div>
             <div className="waiting_check_main2">
-              <span className="waiting_check_sub_font">31번</span>
+              <span className="waiting_check_sub_font">{data}번</span>
             </div>
             <div className="waiting_check_main2">
               <p className="waiting_check_sub_font2">현재 대기중인 팀 </p>
-              <p className="waiting_check_sub_font2"> 30팀</p>
+              <p className="waiting_check_sub_font2"> {data-1}팀</p>
             </div>
             <div className="waiting_check_sub">
               <BigWhiteButton
                 content="웨이팅 취소"
-                onClickHandler={handleButtonClick}
+                value={"CUSTOMER_CANCEL"}
+                onClickHandler={putData}
               ></BigWhiteButton>
             </div>
           </>

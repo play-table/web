@@ -10,7 +10,7 @@ const WaitingHome = () => {
   const [count, setCount] = useState({
     kid:0,
     adult:0,
-    status:"waiting",
+    status:"WAITING",
   });
   const onChangeCount = (name, value)=>{
     setCount({...count,[name]:count[name]+value})
@@ -20,7 +20,7 @@ const WaitingHome = () => {
   const navigate = useNavigate();
 
   const redirect = () => {
-    navigate("/waiting/check");
+    navigate(`/waiting/${storeId}/check`);
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");

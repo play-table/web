@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/atoms/Calendar2.css";
 
 const Calendar = ({
@@ -9,19 +9,34 @@ const Calendar = ({
 }) => {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date()); // 현재 날짜 상태 추가
+  const [orangeCircleDate, setOrangeCircleDate] = useState(new Date());
+
+  useEffect(() => {
+    setOrangeCircleDate(currentDate); // 오렌지 서클을 현재 날짜로 초기화
+  }, [currentDate]);
+
+  useEffect(() => {
+    // 선택한 날짜가 변경되면 동그라미 표시 날짜를 업데이트
+    setOrangeCircleDate(selectedDay || currentDate); // 선택한 날짜가 없으면 현재 날짜로 초기화
+  }, [selectedDay, currentDate]);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const isSameDay = (toDay, compareDay) => {
-    if (
-      toDay.getFullYear() === compareDay?.getFullYear() &&
-      toDay.getMonth() === compareDay?.getMonth() &&
-      toDay.getDate() === compareDay?.getDate()
-    ) {
-      return true;
-    }
-    return false;
+    const toDayWithoutTime = new Date(
+      toDay.getFullYear(),
+      toDay.getMonth(),
+      toDay.getDate()
+    );
+    const compareDayWithoutTime = new Date(
+      compareDay?.getFullYear(),
+      compareDay?.getMonth(),
+      compareDay?.getDate()
+    );
+
+    return toDayWithoutTime.getTime() === compareDayWithoutTime.getTime();
   };
 
   const onClickDay = (day, event) => {
@@ -29,9 +44,11 @@ const Calendar = ({
       setSelectedDay(null);
     } else {
       setSelectedDay(day);
+
+      // 클릭한 날짜로 주황 동그라미 위치 업데이트
+      setCurrentDate(day); // 현재 날짜 업데이트
     }
   };
-
   const prevCalendar = () => {
     setCurrentMonth(
       new Date(
@@ -106,6 +123,10 @@ const Calendar = ({
     return days;
   };
 
+  const isOrangeCircleDay = (day) => {
+    return isSameDay(day, orangeCircleDate);
+  };
+
   const buildCalendarTag = (calendarDays) => {
     return calendarDays.map((day, i) => {
       if (day.getMonth() < currentMonth.getMonth()) {
@@ -135,7 +156,13 @@ const Calendar = ({
           className={`futureDay ${isSameDay(day, selectedDay) && "choiceDay"}`}
           onClick={(e) => onClickDay(day, e)}
         >
-          <span className={isSameDay(day, today) ? "orange-circle" : ""}>
+          <span
+            className={`${
+              isOrangeCircleDay(day) && !isSameDay(day, today)
+                ? "orange-circle"
+                : ""
+            }`}
+          >
             {day.getDate()}
           </span>
         </td>
