@@ -28,8 +28,9 @@ const Reservation = () => {
     setData(data);
   };
   const putData = async (e) => {
-    const { value } = e.target;
 
+    const {value} = e.target;
+    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {})
     await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {});
   };
 
@@ -43,26 +44,19 @@ const Reservation = () => {
       formattedDate = `${year}-${month}-${day}`;
     }
 
-    axios
-      .post(
-        "http://localhost:8000/api/v1/reservation/f1a4d164-958e-4c1e-9b8b-51e43c4e06a",
-        {
-          reservationDay: formattedDate,
-          reservationTime: formatTime(moreTimes[isTimeIdx].time),
-          totalPeople: morePeople[isHumanIdx].people,
-          customerId: "550e8400-e29b-41d4-a716-446655440000",
-          customerName: "이세인",
-          status: "WAITING",
-        }
-      )
-      .then((res) => {
-        navigate(
-          `/switch?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+      api('/api/v1/reservation/c3d5c454-9682-400e-8cb9-2f8f96128e2c', "POST",{
+      reservationDay : formattedDate,
+      reservationTime : formatTime(moreTimes[isTimeIdx].time),
+      totalPeople : morePeople[isHumanIdx].people,
+      // customerId : "550e8400-e29b-41d4-a716-446655440000",
+      // customerName : "이세인",
+      status : "WAITING"
+    }).then((res) => {
+      navigate(`/waiting/${storeId}/check?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`);
+    }).catch((err) => {
+      console.log(err);
+    })
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
@@ -82,54 +76,43 @@ const Reservation = () => {
     Number(time.time.split(":")[1]) +
     (time.time.split(":")[0] === "30" ? 0.5 : 0);
 
-  const initTimeset = (startTime, endTime) => {
+
+  // 예약 시간 선택 리스트
+  const [moreTimes, setMoreTimes] = useState([]);
+  const dateToString = (time) => Number(time.time.split(":")[0]) + (time.time.split(":")[1]==="30" ? 0.5 : 0)
+
+  const initTimeset = (startTime,endTime)=>{
     const s = dateToString(startTime);
     const e = dateToString(endTime);
-
-    const list = [];
-    for (let i = s; i <= e; i += 0.5) {
-      const hours = Math.floor(i);
-      const minutes = i % 1 === 0.5 ? "30" : "00"; // 0.5인 경우 "30", 그렇지 않으면 "00"
-      const time = `${hours}:${minutes}`;
-      list.push({ time, selected: true });
+    const reservationTimeList = []
+    for(let i= s; i <= e;  i += 0.5){
+      const t = (i+"").split(".");
+      const time = t[0] + (t.length === 2?":30":":00");
+      reservationTimeList.push({time, selected: false});
     }
-    return list;
-  };
+    console.log(reservationTimeList);
+    setMoreTimes(reservationTimeList);
+  }
 
-  useEffect(() => {
-    const startTime = { time: "5:30" };
-    const endTime = { time: "22:30" };
-    const generatedTimes = initTimeset(startTime, endTime);
-    setMoreTimes(generatedTimes);
-  }, []);
+  // 인원 선택 리스트
+  const [morePeople, setMorePeople] = useState([]);
+  const reservationPeopleList = [];
 
-  const [moreTimes, setMoreTimes] = useState([
-    { time: "5:30", selected: false },
-    { time: "6:00", selected: false },
-    { time: "6:30", selected: false },
-    { time: "7:00", selected: false },
-    { time: "7:30", selected: false },
-    { time: "8:00", selected: false },
-    { time: "8:30", selected: false },
-    { time: "9:00", selected: false },
-    { time: "7:00", selected: false },
-    { time: "7:00", selected: false },
-    { time: "7:00", selected: false },
-  ]);
-  const [morePeople, setMorePeople] = useState([
-    { people: 1, selected: false },
-    { people: 2, selected: false },
-    { people: 3, selected: false },
-    { people: 4, selected: false },
-    { people: 5, selected: false },
-    { people: 6, selected: false },
-    { people: 7, selected: false },
-    { people: 8, selected: false },
-    { people: 9, selected: false },
-    { people: 10, selected: false },
-    { people: 11, selected: false },
-    { people: 12, selected: false },
-  ]);
+  const initPeopleSet = (reservationPeople) => {
+    for (let people= 1; people<=reservationPeople; people++) {
+      reservationPeopleList.push({people,  selected: false})
+    }
+    console.log(reservationPeopleList);
+    setMorePeople(reservationPeopleList);
+  }
+
+  useEffect(()=>{
+    const startTime = {time: "5:30"}
+    const endTime = {time: "22:30"}
+    const reservationPeople = {people: 9}
+    initTimeset(startTime,endTime)
+    initPeopleSet(reservationPeople.people)
+  },[])
 
   const handleTimeButtonClick = (index) => {
     setIsTimeIdx(index);

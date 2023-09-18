@@ -21,7 +21,7 @@ const WaitingComponent = () => {
   const [isPrevMonth, setIsPrevMonth] = useState(false);
   const [isNextMonth, setIsNextMonth] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
+  const {storeId}=useParams();
 
   useEffect(() => {
     // 경로 파라미터에 따라 switchMenu 상태 변경
@@ -47,6 +47,15 @@ const WaitingComponent = () => {
       setSwitchMenu(true);
     }
   }, [page]);
+
+
+  const putData = async (e) => {
+    const {value} = e.target;
+
+    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {
+
+    }).then(navigate(`/store`))
+  }
 
   function formatDateToYYYYMMDD(dateString) {
     const date = new Date(dateString);
@@ -79,7 +88,6 @@ const WaitingComponent = () => {
     const day = currentDate.getDate().toString().padStart(2, "0");
     return `${year}년 ${month}월 ${day}일`;
   };
-
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -167,7 +175,7 @@ const WaitingComponent = () => {
               </p>
             </div>
             <div className="reservation_confirm_footBtn">
-              <BigWhiteButton content="웨이팅 취소"></BigWhiteButton>
+              <BigWhiteButton value="CUSTOMER_CANCELED" onClick={putData} content="웨이팅 취소"></BigWhiteButton>
             </div>
           </>
         ) : (
