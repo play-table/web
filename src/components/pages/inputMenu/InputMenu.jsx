@@ -9,10 +9,13 @@ const InputMenu = ({content}) => {
             <div className={styles.menu_header}>
                 <span>메뉴 등록</span>
             </div>
-            <InputForm/>
-            <InputForm/>
-            <BigOrangeButton/>
-            <BigWhiteButton/>
+            <div className={styles.insert_wrap}>
+            <InputForm content={"메뉴 이름"}/>
+            <InputForm content={"메뉴 가격"}/>
+            </div>
+            <BigOrangeButton content={"메뉴 등록하기"}/>
+            <br/>
+            <BigWhiteButton content={"닫기"}/>
         </div>
     );
 };
