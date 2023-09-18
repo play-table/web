@@ -1,20 +1,15 @@
 import BigWhiteButton from "../../atoms/BigWhiteButton";
 import SmallButton from "../../atoms/SmallButton";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
-import styles from "../../../styles/pages/waiting/WaitingOner.css";
-import { useNavigate } from "react-router-dom";
+import styles from "../../../styles/pages/waiting/WaitingOwner.css";
+import {useNavigate, useParams} from "react-router-dom";
 
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {api} from "../../../common/api/ApiClient";
 
-const WaitingOner = () => {
+const WaitingOwner = () => {
   const [reservations, setReservations] = useState([
-    {
-      id: 1,
-      name: "김지혜",
-      numberOfPeople: 4,
-      time: "오후 5:00",
-      approved: false,
-    },
+
     // 다른 예약 정보들을 추가하세요.
   ]);
 
@@ -42,42 +37,59 @@ const WaitingOner = () => {
     );
     setReservations(updatedReservations);
   };
-
+  const { storeId } = useParams();
+  const putData = async (e) => {
+    const {value} = e.target
+    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+  }
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    getData()
+  },[]);
+  const getData = async () => {
+    const data = await api(`/api/v1/waiting`, "GET", {})
+    setData(data);
+  }
+  console.log(data)
   return (
-    <div className="waiting_oner_container">
+    <div className="waiting_owner_container">
       <MiniStoreInfo></MiniStoreInfo>
-      <div className="waiting_oner_content">
-        <span className="waiting_oner_content_font">{getCurrentDate()}</span>
+      <div className="waiting_owner_content">
+        <span className="waiting_owner_content_font">{getCurrentDate()}</span>
       </div>
-      {reservations.map((reservation) => (
-        <div key={reservation.id} className="waiting_oner_main">
-          <span className="waiting_oner_main_font">{reservation.id}</span>
-          <span className="waiting_oner_main_font">{reservation.name}</span>
-          <span className="waiting_oner_main_font">
-            {reservation.numberOfPeople}명
+      {data.map((reservation,index) => (
+        <div key={index} className="waiting_owner_main">
+          <span className="waiting_owner_main_font">{reservation.id}</span>
+          <span className="waiting_owner_main_font">{reservation.customer_name}</span>
+          <span className="waiting_owner_main_font">
+            {reservation.total}명
           </span>
-          <span className="waiting_oner_main_font">{reservation.time}</span>
           {!reservation.approved && (
             <>
               <SmallButton
                 content="승인"
                 type="orange"
+                valie="ENTRANCE"
+                onClick={putData}
                 onClickHandler={() => handleApprove(reservation.id)}
+
               ></SmallButton>
               <SmallButton
                 content="취소"
                 type="white"
+                valie="RESTAURANT_CANCEL"
+                onClick={putData}
                 onClickHandler={() => handleCancel(reservation.id)}
               ></SmallButton>
             </>
           )}
         </div>
       ))}
-      <div className="waiting_oner_main_btn">
+      <div className="waiting_owner_main_btn">
         <BigWhiteButton content="닫기"></BigWhiteButton>
       </div>
     </div>
   );
 };
 
-export default WaitingOner;
+export default WaitingOwner;

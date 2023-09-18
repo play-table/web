@@ -3,7 +3,6 @@ import MiniStoreInfo from "../../blocks/MiniStoreInfo";
 import BigOrangeButton from "../../atoms/BigOrangeButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
 import {useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
 import {useEffect, useState} from "react";
 import {api} from "../../../common/api/ApiClient";
 
@@ -20,8 +19,8 @@ const WaitingHome = () => {
 
   const navigate = useNavigate();
 
-  const handleOpenWaiting2 = () => {
-    navigate("/switch");
+  const redirect = () => {
+    navigate("/waiting/check");
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
@@ -37,9 +36,10 @@ const WaitingHome = () => {
     setData(data);
   }
 
-  const putData = async (e) => {
+  const postData = async (e) => {
     const {value} = e.target
-    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+    await api(`/api/v1/waiting/${storeId}`, "POST", count)
+    redirect();
   }
 
       // axios
@@ -57,18 +57,23 @@ const WaitingHome = () => {
           <div className="waiting_main_font">현재 대기중인 팀</div>
         </div>
         <div className="waiting_main">
-          <span className="waiting_sub_font">{data-1}팀</span>
+          <span className="waiting_sub_font">{data}팀</span>
         </div>
         <div className="waiting_middle">
           <div className="waiting_main_font">성인</div>
           <div className="waiting_main_font">
-            <button onClick={onChangeCount("adult",-1)}>-</button> {count.adult} <button onClick={onChangeCount("adult",+1)}>+</button>
+            <button onClick={()=>onChangeCount("adult",-1)}>-</button>
+            {count.adult}
+            <button onClick={()=>onChangeCount("adult",+1)}>+</button>
           </div>
         </div>
         <div className="waiting_middle">
           <span className="waiting_main_font">유아</span>
           <span className="waiting_main_font">
-            <button onClick={onChangeCount("kid",-1)}>-</button>  {count.kid} <button onClick={onChangeCount("kid",+1)}>+</button></span>
+            <button onClick={()=>onChangeCount("kid",-1)}>-</button>
+            {count.kid}
+            <button onClick={()=>onChangeCount("kid",+1)}>+</button>
+          </span>
         </div>
         <div className="waiting_main">
           <span className="waiting_main_font">
@@ -79,15 +84,16 @@ const WaitingHome = () => {
         <div className="waiting_main">
           <BigOrangeButton
             content="웨이팅 등록하기"
-            onClickHandler={handleOpenWaiting2}
+            value="WAITING"
+            onClickHandler={postData}
           ></BigOrangeButton>
           <div className="waiting_sub">
             <BigWhiteButton
               content="닫기"
               onClickHandler={handleButtonClick}
             ></BigWhiteButton>
-            <button value="CUSTOMER_CANCEL" onClick={putData}>취소버튼</button>
-            <button value="OWNER_CANCEL" onClick={putData}>취소버튼</button>
+            {/*<button value="CUSTOMER_CANCEL" onClick={putData}>취소버튼</button>*/}
+            {/*<button value="OWNER_CANCEL" onClick={putData}>취소버튼</button>*/}
           </div>
         </div>
       </div>

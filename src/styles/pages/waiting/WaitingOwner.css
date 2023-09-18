@@ -1,15 +1,15 @@
-.waiting_oner_container {
+.waiting_owner_container {
   position: relative;
   display: flex;
   flex-direction: column;
 }
-.waiting_oner_content {
+.waiting_owner_content {
   display: flex;
   justify-self: start;
   margin-top: 24px;
   margin-bottom: 23px;
 }
-.waiting_oner_content_font {
+.waiting_owner_content_font {
   color: #000;
   font-family: Inter;
   font-size: 20px;
@@ -17,14 +17,14 @@
   font-weight: 400;
   line-height: normal;
 }
-.waiting_oner_main {
+.waiting_owner_main {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
   margin-right: 20px;
 }
-.waiting_oner_main_font {
+.waiting_owner_main_font {
   color: #000;
   font-family: Inter;
   font-size: 20px;
@@ -32,7 +32,7 @@
   font-weight: 400;
   line-height: normal;
 }
-.waiting_oner_main_btn {
+.waiting_owner_main_btn {
   display: flex;
   justify-content: center;
   align-items: center;
