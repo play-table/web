@@ -14,9 +14,9 @@ const TopStoreSlideContainer = () => {
   const getStore = async () => {
       try {
           const data = await api("/api/v1/store/waiting-top", "GET", {})
-          console.log(data);
+          setStores(data);
       } catch (error){
-            alert('dadsada')
+            alert('fail')
       }
   }
   useEffect(() => {
@@ -24,18 +24,20 @@ const TopStoreSlideContainer = () => {
   }, []);
 
   return (
-    <div>
-      <h3 className={styles.slide_title}>Waiting Top 10</h3>
-      <div className={styles.store_slide}>
-        <Swiper slidesPerView={2} spaceBetween={10} className="mySwiper">
-          {stores.map((value, index) => (
-            <SwiperSlide key={index}>
-              <StoreCard store={value} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <div>
+          <h3 className={styles.slide_title}>웨이팅 Top 10</h3>
+          <div className={styles.review_slide_container}>
+              <Swiper slidesPerView={2} spaceBetween={10} className="mySwiper">
+                  {stores.map((value, index) => (
+                      <SwiperSlide key={index}>
+                          <div className={styles.review_box}>
+                              <StoreCard store={value} />
+                          </div>
+                      </SwiperSlide>
+                  ))}
+              </Swiper>
+          </div>
       </div>
-    </div>
   );
 };
 

@@ -78,7 +78,7 @@ const WaitingComponent = () => {
 
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
-    navigate(-1); // 혹은 다른 작업 수행
+    navigate(`/store`); // 혹은 다른 작업 수행
   };
 
   const getCurrentDate = () => {
@@ -96,6 +96,22 @@ const WaitingComponent = () => {
     const day = date.getDate().toString().padStart(2, '0');
 
     return `${year}년 ${month}월 ${day}일`;
+  }
+
+  const [data, setData] = useState([]);
+  useEffect(()=>{
+    getData()
+  },[]);
+  const { storeId } = useParams();
+  const getData = async () => {
+    const data = await api(`/api/v1/waiting/${storeId}`, "GET", {})
+    setData(data);
+  }
+
+  const putData = async (e) => {
+    const {value} = e.target
+    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+    handleButtonClick();
   }
 
   return (
@@ -169,16 +185,17 @@ const WaitingComponent = () => {
               <span className="waiting_check_main_font">내 웨이팅 번호</span>
             </div>
             <div className="waiting_check_main2">
-              <span className="waiting_check_sub_font">31번</span>
+              <span className="waiting_check_sub_font">{data}번</span>
             </div>
             <div className="waiting_check_main2">
               <p className="waiting_check_sub_font2">현재 대기중인 팀 </p>
-              <p className="waiting_check_sub_font2"> 30팀</p>
+              <p className="waiting_check_sub_font2"> {data-1}팀</p>
             </div>
             <div className="waiting_check_sub">
               <BigWhiteButton
                 content="웨이팅 취소"
-                onClickHandler={handleButtonClick}
+                value={"CUSTOMER_CANCEL"}
+                onClickHandler={putData}
               ></BigWhiteButton>
             </div>
           </>

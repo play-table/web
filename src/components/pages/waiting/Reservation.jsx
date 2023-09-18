@@ -1,36 +1,38 @@
 import Calendar from "../../atoms/Calander";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
 import SmallButton from "../../atoms/SmallButton";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import RoundButton from "../../atoms/RoundButton";
 import BigOrangeButton from "../../atoms/BigOrangeButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../../styles/pages/home/SwiperStyles.css";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
-import {api} from "../../../common/api/ApiClient";
+import { api } from "../../../common/api/ApiClient";
+import styles from "../../../styles/pages/waiting/Reservation.module.css";
 
 const Reservation = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [isPrevMonth, setIsPrevMonth] = useState(false);
   const [isNextMonth, setIsNextMonth] = useState(false);
-  const [isTimeIdx, setIsTimeIdx] = useState('');
-  const [isHumanIdx, setIsHumanIdx] = useState('');
+  const [isTimeIdx, setIsTimeIdx] = useState("");
+  const [isHumanIdx, setIsHumanIdx] = useState("");
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const {storeId}=useParams();
+  const { storeId } = useParams();
   const getData = async () => {
-    const data = await api(`/api/v1/reservation/${storeId}`, "GET", {})
+    const data = await api(`/api/v1/reservation/${storeId}`, "GET", {});
     setData(data);
-  }
+  };
   const putData = async (e) => {
+
     const {value} = e.target;
     await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {})
-  }
-
+    await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {});
+  };
 
   const handleOpenReservation = () => {
     let formattedDate;
@@ -41,6 +43,7 @@ const Reservation = () => {
       const day = selectedDay.getDate().toString().padStart(2, "0");
       formattedDate = `${year}-${month}-${day}`;
     }
+
 
       api('/api/v1/reservation/c3d5c454-9682-400e-8cb9-2f8f96128e2c', "POST",{
       reservationDay : formattedDate,
@@ -54,7 +57,6 @@ const Reservation = () => {
     }).catch((err) => {
       console.log(err);
     })
-
   };
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
@@ -69,6 +71,10 @@ const Reservation = () => {
 
     return `${formattedHours}:${formattedMinutes}:${seconds}`;
   }
+
+  const dateToString = (time) =>
+    Number(time.time.split(":")[1]) +
+    (time.time.split(":")[0] === "30" ? 0.5 : 0);
 
 
   // 예약 시간 선택 리스트
@@ -108,8 +114,6 @@ const Reservation = () => {
     initPeopleSet(reservationPeople.people)
   },[])
 
-
-  // 시간 버튼 클릭 핸들러
   const handleTimeButtonClick = (index) => {
     setIsTimeIdx(index);
     const updatedTimes = [...moreTimes];
@@ -117,7 +121,6 @@ const Reservation = () => {
     setMoreTimes(updatedTimes);
   };
 
-  // 인원 버튼 클릭 핸들러
   const handlePeopleButtonClick = (index) => {
     setIsHumanIdx(index);
     const updatedPeople = [...morePeople];
@@ -127,9 +130,9 @@ const Reservation = () => {
 
   return (
     <>
-      <div className="reservation_container">
+      <div className={styles.reservation_container}>
         <MiniStoreInfo />
-        <div className="reservation_main">
+        <div className={styles.reservation_main}>
           <Calendar
             selectedDay={selectedDay}
             setSelectedDay={setSelectedDay}
@@ -137,11 +140,9 @@ const Reservation = () => {
             isNextMonth={isNextMonth}
           />
         </div>
-        <div className="reservation_main_time">
-          <Swiper
-            slidesPerView={6}
-            navigation={false} // Navigation 모듈 사용
-          >
+        <div className={styles.reservation_main_time}>
+          {/* 시간 슬라이드 */}
+          <Swiper slidesPerView={6} navigation={false}>
             {moreTimes.map((item, index) => (
               <SwiperSlide key={index}>
                 <SmallButton
@@ -153,13 +154,14 @@ const Reservation = () => {
             ))}
           </Swiper>
         </div>
-        <div className="reservation_main_person">
+        <div className={styles.reservation_main_person}>
+          {/* 인원 슬라이드 */}
           <Swiper
             slidesPerView={7}
             spaceBetween={20}
             pagination={{ clickable: true }}
             className="mySwiper"
-            navigation={false} // Navigation 모듈 사용
+            navigation={false}
           >
             {morePeople.map((item, index) => (
               <SwiperSlide key={index}>
@@ -172,13 +174,15 @@ const Reservation = () => {
             ))}
           </Swiper>
         </div>
-        <div className="reservation_main_btn_container">
-          <BigOrangeButton value="WAITING" onClick={putData}
+        <div className={styles.reservation_main_btn_container}>
+          <BigOrangeButton
+            value="WAITING"
+            onClick={putData}
             content="예약 등록하기"
             onClickHandler={handleOpenReservation}
           />
         </div>
-        <div className="reservation_main_btn_container2">
+        <div className={styles.reservation_main_btn_container2}>
           <BigWhiteButton
             content="닫기"
             onClickHandler={handleButtonClick}

@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/store",
+        path: "/store/:id",
         element: <Store />,
       },
       {
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         element: <ReservationOwner />,
       },
       {
-        path: "/waiting/owner/:storeId",
+        path: "/waiting/:storeId/owner",
         element: <WaitingOner />,
       },
       {

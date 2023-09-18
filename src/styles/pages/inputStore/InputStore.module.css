@@ -49,3 +49,6 @@ input,select{
     font-size: 15px;
     height: 30px;
 }
+.insert_wrap {
+    margin-top: 35px;
+}

@@ -10,9 +10,10 @@ const InputStore = () => {
             <div className={styles.store_header}>
                 <span>가게 등록</span>
             </div>
-            <InputForm/>
-            <InputForm/>
-            <InputForm/>
+            <div className={styles.insert_wrap}>
+            <InputForm content={"가게이름"}/>
+            <InputForm content={"주소"}/>
+            <InputForm content={"전화번호"}/>
             <div className={styles.insert_box}>
                 <span>운영시간</span>
                 <div className={styles.time_box}>
@@ -53,9 +54,11 @@ const InputStore = () => {
                     <option value="">기타</option>
                 </select>
             </div>
-            <InputForm/>
-            <BigOrangeButton/>
-            <BigWhiteButton/>
+            <InputForm content={"가게이미지"}/>
+            </div>
+            <BigOrangeButton content={"가게 등록하기"}/>
+            <br/>
+            <BigWhiteButton content={"닫기"}/>
         </div>
     );
 };

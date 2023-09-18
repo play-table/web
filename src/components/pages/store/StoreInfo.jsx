@@ -1,15 +1,16 @@
 import React from 'react';
 import styles from '../../../styles/pages/store/Storeinfo.module.css';
+import {Category} from "../../../common/Category";
 
-const StoreInfo = () => {
+const StoreInfo = ({store}) => {
     return (
         <div className={styles.store_info}>
-            <p>일식·경주</p>
-            <span>자매국수</span>
+            <p>{`${Category[store.category]}·${store.address}`}</p>
+            <span>{store.name}</span>
             <div className={styles.star_box}>
                 <img src="/image/star.png" alt="star"/>
-                <p>4.3</p>
-                <span>리뷰 1,120개</span>
+                <p>{store.totalRating }</p>
+                <span>{`${store.reviewCount} 개`}</span>
             </div>
         </div>
     );
