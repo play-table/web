@@ -2,9 +2,10 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 65%;
     height: 70%;
-    border-radius: 20px
+    width: 65%;
+    border-radius: 20px;
+    border: 1px solid orange;
 }
 
 .input_wrap{

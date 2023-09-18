@@ -5,10 +5,10 @@ import HomeSearchInput from './HomeSearchInput';
 
 const HomeHeader = () => {
   return (
-    <header className={styles.header_container}>
+    <div className={styles.header_container}>
       <TableLogo />
       <HomeSearchInput />
-    </header>
+    </div>
   );
 };
 
