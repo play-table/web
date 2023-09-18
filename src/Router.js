@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         element: <WaitingOner />,
       },
       {
-        path: "/waiting/check/:storeId",
+        path: "/waiting/:storeId/check",
         element: <WaitingComponent />,
       },
       {

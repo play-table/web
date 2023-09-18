@@ -42,15 +42,15 @@ const Reservation = () => {
       formattedDate = `${year}-${month}-${day}`;
     }
 
-    axios.post('http://localhost:8000/api/v1/reservation/f1a4d164-958e-4c1e-9b8b-51e43c4e06a', {
+      api('/api/v1/reservation/c3d5c454-9682-400e-8cb9-2f8f96128e2c', "POST",{
       reservationDay : formattedDate,
       reservationTime : formatTime(moreTimes[isTimeIdx].time),
       totalPeople : morePeople[isHumanIdx].people,
-      customerId : "550e8400-e29b-41d4-a716-446655440000",
-      customerName : "이세인",
+      // customerId : "550e8400-e29b-41d4-a716-446655440000",
+      // customerName : "이세인",
       status : "WAITING"
     }).then((res) => {
-      navigate(`/switch?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`);
+      navigate(`/waiting/c3d5c454-9682-400e-8cb9-2f8f96128e2c/check?day=${selectedDay}&time=${moreTimes[isTimeIdx].time}&people=${morePeople[isHumanIdx].people}`);
     }).catch((err) => {
       console.log(err);
     })
