@@ -1,0 +1,58 @@
+/* ... 이전 스타일들 ... */
+
+/* 예약 컨테이너 */
+.reservation_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* 수직 가운데 정렬 추가 */
+}
+
+/* 메인 컨테이너 */
+.reservation_main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px; /* 원하는 간격 크기로 조정 */
+  text-align: center;
+  margin-top: 23px;
+}
+
+/* 시간 컨테이너 */
+.reservation_main_time {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 8px;
+  margin-right: 8px; /* 원하는 간격 크기로 조정 */
+}
+
+/* 인원 컨테이너 */
+.reservation_main_person {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 8px;
+  margin-right: 8px; /* 원하는 간격 크기로 조정 */
+}
+
+/* 예약 버튼 컨테이너 */
+.reservation_main_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* 원하는 간격 크기로 조정 */
+}
+
+/* 닫기 버튼 컨테이너 */
+.reservation_main_btn_container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* 원하는 간격 크기로 조정 */
+  margin-bottom: 70px; /* 원하는 간격 크기로 조정 */
+}
+
+/* ... 이후 스타일들 ... */
