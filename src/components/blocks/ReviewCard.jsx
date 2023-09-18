@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../styles/blocks/ReviewCard.module.css'
 
-const ReviewCard = () => {
+const ReviewCard = ({store}) => {
     return (
         <div className={styles.review_container}>
             <div className={styles.user_wrap}>
