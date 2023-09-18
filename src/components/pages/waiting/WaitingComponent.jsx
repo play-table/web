@@ -16,17 +16,47 @@ const WaitingComponent = () => {
   const [switchMenu, setSwitchMenu] = useState(true);
   const [error, setError] = useState("");
   const [selectedDay, setSelectedDay] = useState(null);
+  const [day, setDay] = useState('');
+  const [time, setTime] = useState('');
+  const [people, setPeople] = useState('');
   const [isPrevMonth, setIsPrevMonth] = useState(false);
   const [isNextMonth, setIsNextMonth] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+
 
   useEffect(() => {
     // 경로 파라미터에 따라 switchMenu 상태 변경
+    // 현재 URL 가져오기
+    const currentURL = window.location.href;
+
+    // URL 파라미터를 객체로 파싱
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // 특정 파라미터 가져오기
+    const paramName = 'day'; // 가져올 파라미터 이름
+    const paramName2 = 'time'; // 가져올 파라미터 이름
+    const paramName3 = 'people'; // 가져올 파라미터 이름
+    setDay(urlParams.get(paramName));
+    setTime(urlParams.get(paramName2));
+    setPeople(urlParams.get(paramName3));
+
+    setSelectedDate(new Date(formatDateToYYYYMMDD(urlParams.get(paramName))))
+
     if (page === "switch") {
       setSwitchMenu(false);
     } else {
       setSwitchMenu(true);
     }
   }, [page]);
+
+  function formatDateToYYYYMMDD(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
 
   const menuSwitch = (data) => {
     if (data === "res") {
@@ -50,6 +80,16 @@ const WaitingComponent = () => {
     const day = currentDate.getDate().toString().padStart(2, "0");
     return `${year}년 ${month}월 ${day}일`;
   };
+
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${year}년 ${month}월 ${day}일`;
+  }
 
   return (
     <>
@@ -86,22 +126,22 @@ const WaitingComponent = () => {
           <>
             <div className="reservation_confirm_head_content">
               <span className="reservation_confirm_font">
-                예약 날짜 : {getCurrentDate()}
+                예약 날짜 : {formatDate(day)}
               </span>
             </div>
             <div className="reservation_confirm_main">
               <Calendar
-                selectedDay={selectedDay}
-                setSelectedDay={setSelectedDay}
+                selectedDay={selectedDate}
+                setSelectedDay={setSelectedDate}
                 isPrevMonth={isPrevMonth}
                 isNextMonth={isNextMonth}
               />
             </div>
             <div className="reservation_confirm_btn">
-              <SmallButton content="5:30" type="orange"></SmallButton>
+              <SmallButton content={time} type="orange"></SmallButton>
             </div>
             <div className="reservation_confirm_btn">
-              <RoundButton content="4명 " type="click" />
+              <RoundButton content={people + '명'} type="click" />
             </div>
             <div className="reservation_confirm_content">
               <p className="reservation_confirm_content_font">주의사항</p>

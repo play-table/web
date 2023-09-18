@@ -53,11 +53,11 @@ const router = createBrowserRouter([
         element: <WaitingHome />,
       },
       {
-        path: "/reservation",
+        path: "/reservation/:storeId",
         element: <Reservation />,
       },
       {
-        path: "/reservation3",
+        path: "/reservation/owner/:storeId",
         element: <ReservationOwner />,
       },
       {

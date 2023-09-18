@@ -7,4 +7,6 @@ export const api = async (url, method, data) => {
         url, method, data
     })
     return body.data
+
 }
+
