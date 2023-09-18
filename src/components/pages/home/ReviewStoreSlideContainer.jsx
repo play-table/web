@@ -19,7 +19,6 @@ const ReviewStoreSlideContainer = () => {
           {reviews.map((value, index) => (
             <SwiperSlide key={index}>
               <div className={styles.review_box}>
-                <UserBox user={value.user} />
                 <StoreCard store={value.store} />
               </div>
             </SwiperSlide>
