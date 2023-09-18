@@ -9,10 +9,7 @@ import Review from "./components/pages/review/Review";
 import ReviewInput from "./components/pages/review/ReviewInput";
 import Edit from "./components/pages/my/Edit";
 import WaitingHome from "./components/pages/waiting/WaitingHome";
-import WaitingCheck from "./components/pages/waiting/WaitingCheck";
-import Calendar from "./components/atoms/Calander";
 import Reservation from "./components/pages/waiting/Reservation";
-import ReservationConfirm from "./components/pages/waiting/ReservationConfirm";
 import ReservationOner from "./components/pages/waiting/ReservationOner";
 import WaitingOner from "./components/pages/waiting/WaitingOner";
 import WaitingComponent from "./components/pages/waiting/WaitingComponent";
@@ -39,15 +36,15 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "/review",
+        path: "/review/:storeId",
         element: <Review />,
       },
       {
-        path: "/review/input",
+        path: "/review/input/:storeId",
         element: <ReviewInput />,
       },
       {
-        path: "/edit",
+        path: "/edit/:userId",
         element: <Edit />,
       },
       {
