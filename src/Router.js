@@ -18,6 +18,7 @@ import Owner from "./components/pages/owner/Owner";
 import InputMenu from "./components/pages/inputMenu/InputMenu";
 import InputStore from "./components/pages/inputStore/InputStore";
 import AuthCheck from "./components/pages/customer/AuthCheck";
+import MyStore from "./components/pages/owner/MyStore";
 
 const router = createBrowserRouter([
   {
@@ -77,7 +78,11 @@ const router = createBrowserRouter([
         element: <Owner />,
       },
       {
-        path: "/inputMenu",
+        path: "/mystore/:redirect",
+        element: <MyStore />,
+      },
+      {
+        path: "/owner/:storeId/inputMenu",
         element: <InputMenu />,
       },
       {
