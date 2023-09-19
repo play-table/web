@@ -9,7 +9,7 @@ const Owner = () => {
             <span>점주 서비스</span>
             <div className={styles.owner_btn_wrap}>
                 <button onClick={e=>nav('/inputStore')}>가게등록</button>
-                <button>메뉴등록</button>
+                <button onClick={e=>nav('/mystore/inputMenu')}>메뉴등록</button>
                 <button>예약확인</button>
                 <button>줄서기 확인</button>
             </div>
