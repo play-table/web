@@ -70,7 +70,7 @@ const WaitingComponent = () => {
 
   const handleButtonClick = () => {
     console.log("BigWhiteButton clicked");
-    navigate(`/store`); // 혹은 다른 작업 수행
+    navigate('/'); // 혹은 다른 작업 수행
   };
 
   const getCurrentDate = () => {
@@ -92,17 +92,17 @@ const WaitingComponent = () => {
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    getData();
+    getReservationData();
   }, []);
   const { storeId } = useParams();
-  const getData = async () => {
-    const data = await api(`/api/v1/waiting/${storeId}`, "GET", {});
+  const getReservationData = async () => {
+    const data = await api(`/api/v1/reservation/${storeId}`, "GET", {});
     setData(data);
   };
 
-  const putData = async (e) => {
+  const putReservationData = async (e) => {
     const { value } = e.target;
-    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {});
+    await api(`/api/v1/reservation/d7ce2ba9-8caf-40b4-98ed-20207d9fd6e7/${value}`, "PUT", {});
     handleButtonClick();
   };
 
@@ -169,7 +169,7 @@ const WaitingComponent = () => {
             <div className="reservation_confirm_footBtn">
               <BigWhiteButton
                 value="CUSTOMER_CANCELED"
-                onClick={putData}
+                onClick={putReservationData}
                 content="웨이팅 취소"
               ></BigWhiteButton>
             </div>
@@ -191,7 +191,7 @@ const WaitingComponent = () => {
               <BigWhiteButton
                 content="웨이팅 취소"
                 value={"CUSTOMER_CANCEL"}
-                onClickHandler={putData}
+                // onClickHandler={putData}
               ></BigWhiteButton>
             </div>
           </>
