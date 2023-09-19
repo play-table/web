@@ -71,12 +71,6 @@ const Reservation = () => {
 
     return `${formattedHours}:${formattedMinutes}:${seconds}`;
   }
-
-  const dateToString = (time) =>
-    Number(time.time.split(":")[1]) +
-    (time.time.split(":")[0] === "30" ? 0.5 : 0);
-
-
   // 예약 시간 선택 리스트
   const [moreTimes, setMoreTimes] = useState([]);
   const dateToString = (time) => Number(time.time.split(":")[0]) + (time.time.split(":")[1]==="30" ? 0.5 : 0)

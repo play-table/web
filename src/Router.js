@@ -11,7 +11,7 @@ import Edit from "./components/pages/my/Edit";
 import WaitingHome from "./components/pages/waiting/WaitingHome";
 import Reservation from "./components/pages/waiting/Reservation";
 import ReservationOwner from "./components/pages/waiting/ReservationOwner";
-import WaitingOner from "./components/pages/waiting/WaitingOner";
+import WaitingOwner from "./components/pages/waiting/WaitingOwner";
 import WaitingComponent from "./components/pages/waiting/WaitingComponent";
 import Customer from "./components/pages/customer/Customer";
 import Owner from "./components/pages/owner/Owner";
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/waiting/:storeId/owner",
-        element: <WaitingOner />,
+        element: <WaitingOwner />,
       },
       {
         path: "/waiting/:storeId/check",

@@ -7,6 +7,7 @@ import BigWhiteButton from "../../atoms/BigWhiteButton";
 import {useNavigate, useParams} from "react-router-dom";
 import classes from "../../../styles/pages/my/Myprofile.module.css";
 import {api} from "../../../common/api/ApiClient";
+import style from "../../../styles/pages/waiting/CheckMain.module.css";
 
 const WaitingComponent = () => {
   const { page } = useParams(); // URL에서 경로 파라미터를 가져옴
@@ -51,9 +52,7 @@ const WaitingComponent = () => {
 
   const putData = async (e) => {
     const {value} = e.target;
-
     await api(`/api/v1/reservation/${storeId}/${value}`, "PUT", {
-
     }).then(navigate(`/store`))
   }
 
@@ -102,16 +101,9 @@ const WaitingComponent = () => {
   useEffect(()=>{
     getData()
   },[]);
-  const { storeId } = useParams();
   const getData = async () => {
     const data = await api(`/api/v1/waiting/${storeId}`, "GET", {})
     setData(data);
-  }
-
-  const putData = async (e) => {
-    const {value} = e.target
-    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
-    handleButtonClick();
   }
 
   return (
@@ -181,17 +173,17 @@ const WaitingComponent = () => {
         ) : (
           // 줄서기 내용
           <>
-            <div className="waiting_check_main">
-              <span className="waiting_check_main_font">내 웨이팅 번호</span>
+            <div className={style.waiting_check_main}>
+              <span className={style.waiting_check_main_font}>내 웨이팅 번호</span>
             </div>
-            <div className="waiting_check_main2">
-              <span className="waiting_check_sub_font">{data}번</span>
+            <div className={style.waiting_check_main2}>
+              <span className={style.waiting_check_sub_font}>{data}번</span>
             </div>
-            <div className="waiting_check_main2">
-              <p className="waiting_check_sub_font2">현재 대기중인 팀 </p>
-              <p className="waiting_check_sub_font2"> {data-1}팀</p>
+            <div className={style.waiting_check_main2}>
+              <p className={style.waiting_check_sub_font2}>현재 대기중인 팀 </p>
+              <p className={style.waiting_check_sub_font2}> {data-1}팀</p>
             </div>
-            <div className="waiting_check_sub">
+            <div className={style.waiting_check_sub}>
               <BigWhiteButton
                 content="웨이팅 취소"
                 value={"CUSTOMER_CANCEL"}

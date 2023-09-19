@@ -1,15 +1,14 @@
 import BigWhiteButton from "../../atoms/BigWhiteButton";
 import SmallButton from "../../atoms/SmallButton";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
-import styles from "../../../styles/pages/waiting/WaitingOwner.css";
-import {useNavigate, useParams} from "react-router-dom";
+import styles from "../../../styles/pages/waiting/WaitingOwner.module.css";
+import {redirect, useNavigate, useParams} from "react-router-dom";
 
 import React, {useEffect, useState} from "react";
 import {api} from "../../../common/api/ApiClient";
 
 const WaitingOwner = () => {
   const [reservations, setReservations] = useState([
-
     // 다른 예약 정보들을 추가하세요.
   ]);
 
@@ -38,10 +37,22 @@ const WaitingOwner = () => {
     setReservations(updatedReservations);
   };
   const { storeId } = useParams();
-  const putData = async (e) => {
-    const {value} = e.target
-    await api(`/api/v1/waiting/${storeId}/${value}`, "PUT", {})
+
+  const deleteData = async (id) => {
+    await api(`/api/v1/waiting/${{id}}`, "DELETE", {})
+    handleCancel(id);
+    redirect();
   }
+
+  const postData = async (total,id) => {
+    await api(`/api/v1/waiting/history/${storeId}`, "POST", {
+      storeId,
+      total
+    })
+    redirect();
+    handleApprove(id)
+  }
+  console.log(storeId)
   const [data, setData] = useState([]);
   useEffect(()=>{
     getData()
@@ -52,16 +63,16 @@ const WaitingOwner = () => {
   }
   console.log(data)
   return (
-    <div className="waiting_owner_container">
-      <MiniStoreInfo></MiniStoreInfo>
-      <div className="waiting_owner_content">
-        <span className="waiting_owner_content_font">{getCurrentDate()}</span>
+    <div className={styles.waiting_owner_container}>
+      <MiniStoreInfo/>
+      <div className={styles.waiting_owner_content}>
+        <span className={styles.waiting_owner_content_font}>{getCurrentDate()}</span>
       </div>
       {data.map((reservation,index) => (
-        <div key={index} className="waiting_owner_main">
-          <span className="waiting_owner_main_font">{reservation.id}</span>
-          <span className="waiting_owner_main_font">{reservation.customer_name}</span>
-          <span className="waiting_owner_main_font">
+        <div key={index} className={styles.waiting_owner_main}>
+          <span className={styles.waiting_owner_main_font}>{reservation.id}</span>
+          <span className={styles.waiting_owner_main_font}>{reservation.customer_name}</span>
+          <span className={styles.waiting_owner_main_font}>
             {reservation.total}명
           </span>
           {!reservation.approved && (
@@ -69,23 +80,19 @@ const WaitingOwner = () => {
               <SmallButton
                 content="승인"
                 type="orange"
-                valie="ENTRANCE"
-                onClick={putData}
-                onClickHandler={() => handleApprove(reservation.id)}
+                onClickHandler={()=>postData(reservation.total,reservation.id)}
 
               ></SmallButton>
               <SmallButton
                 content="취소"
                 type="white"
-                valie="RESTAURANT_CANCEL"
-                onClick={putData}
-                onClickHandler={() => handleCancel(reservation.id)}
+                onClickHandler={deleteData}
               ></SmallButton>
             </>
           )}
         </div>
       ))}
-      <div className="waiting_owner_main_btn">
+      <div className={styles.waiting_owner_main_btn}>
         <BigWhiteButton content="닫기"></BigWhiteButton>
       </div>
     </div>

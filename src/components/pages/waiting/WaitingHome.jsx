@@ -1,4 +1,4 @@
-import styles from "../../../styles/pages/waiting/WaitingHome.css";
+import styles from "../../../styles/pages/waiting/WaitingHome.module.css";
 import MiniStoreInfo from "../../blocks/MiniStoreInfo";
 import BigOrangeButton from "../../atoms/BigOrangeButton";
 import BigWhiteButton from "../../atoms/BigWhiteButton";
@@ -53,41 +53,41 @@ const WaitingHome = () => {
     <>
       <div className={styles.waiting_container}>
         <MiniStoreInfo />
-        <div className="waiting_main">
-          <div className="waiting_main_font">현재 대기중인 팀</div>
+        <div className={styles.waiting_main}>
+          <div className={styles.waiting_main_font}>현재 대기중인 팀</div>
         </div>
-        <div className="waiting_main">
-          <span className="waiting_sub_font">{data}팀</span>
+        <div className={styles.waiting_main}>
+          <span className={styles.waiting_sub_font}>{data}팀</span>
         </div>
-        <div className="waiting_middle">
-          <div className="waiting_main_font">성인</div>
-          <div className="waiting_main_font">
+        <div className={styles.waiting_middle}>
+          <div className={styles.waiting_main_font}>성인</div>
+          <div className={styles.waiting_main_font}>
             <button onClick={()=>onChangeCount("adult",-1)}>-</button>
             {count.adult}
             <button onClick={()=>onChangeCount("adult",+1)}>+</button>
           </div>
         </div>
-        <div className="waiting_middle">
-          <span className="waiting_main_font">유아</span>
-          <span className="waiting_main_font">
+        <div className={styles.waiting_middle}>
+          <span className={styles.waiting_main_font}>유아</span>
+          <span className={styles.waiting_main_font}>
             <button onClick={()=>onChangeCount("kid",-1)}>-</button>
             {count.kid}
             <button onClick={()=>onChangeCount("kid",+1)}>+</button>
           </span>
         </div>
-        <div className="waiting_main">
-          <span className="waiting_main_font">
+        <div className={styles.waiting_main}>
+          <span className={styles.waiting_main_font}>
             {" "}
-            총방문인원 :<span className="waiting_sub_font"> {count.adult+count.kid}명</span>
+            총방문인원 :<span className={styles.waiting_sub_font}> {count.adult+count.kid}명</span>
           </span>
         </div>
-        <div className="waiting_main">
+        <div className={styles.waiting_main}>
           <BigOrangeButton
             content="웨이팅 등록하기"
             value="WAITING"
             onClickHandler={postData}
           ></BigOrangeButton>
-          <div className="waiting_sub">
+          <div className={styles.waiting_sub}>
             <BigWhiteButton
               content="닫기"
               onClickHandler={handleButtonClick}
