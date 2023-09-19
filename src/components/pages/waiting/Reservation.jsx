@@ -37,7 +37,7 @@ const Reservation = () => {
       const day = selectedDay.getDate().toString().padStart(2, "0");
       formattedDate = `${year}-${month}-${day}`;
     }
-    api('/api/v1/reservation/c3d5c454-9682-400e-8cb9-2f8f96128e2c', "POST",{
+    api(`/api/v1/reservation/${storeId}`, "POST",{
       reservationDay : formattedDate,
       reservationTime : formatTime(moreTimes[isTimeIdx].time),
       totalPeople : morePeople[isHumanIdx].people,
